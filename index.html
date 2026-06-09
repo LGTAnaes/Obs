@@ -5,16 +5,18 @@
 <title>LGT Obstetric Anaesthesia – Quick Reference</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="manifest" href="manifest.json">
-<meta name="theme-color" content="#005EB8">
+<meta name="theme-color" content="#2B6FE6">
 
 <style>
 :root {
-  --nhs-blue: #005EB8;
-  --nhs-blue-2: #004C99;
-  --nhs-blue-3: #004080;
-  --nhs-blue-emergency: #002F5F;
+  --brand-dark:   #1E3A8A;   /* dark navy — figure colour in logo */
+  --brand-mid:    #1D4ED8;   /* mid royal blue */
+  --brand-light:  #2563EB;   /* slightly lighter royal blue */
+  --brand-accent: #3B82F6;   /* bright accent blue */
+  --brand-deep:   #1e3270;   /* deepest navy for emergencies / deep elements */
+  --brand-bg:     #2B6FE6;   /* logo background — used as header */
   --nhs-grey: #425563;
-  --bg: #f4f6f8;
+  --bg: #EBF2FC;             /* very light tint of logo blue for page background */
   --card: #ffffff;
   --highlight: #fff176;
   --highlight-border: #f9a825;
@@ -22,29 +24,57 @@
 
 *, *::before, *::after { box-sizing: border-box; }
 
+html {
+  /* Extend theme colour into iOS/Android status bar & safe areas */
+  background: var(--brand-bg);
+}
+
 body {
   margin: 0;
   font-family: Arial, Helvetica, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
   background: var(--bg);
   color: #212121;
   line-height: 1.45;
+  padding-top: env(safe-area-inset-top);
+  padding-left: env(safe-area-inset-left);
+  padding-right: env(safe-area-inset-right);
+  padding-bottom: env(safe-area-inset-bottom);
 }
 
 /* ── HEADER ── */
 header {
-  background: var(--nhs-blue);
+  background: var(--brand-bg);
   color: white;
   padding: 0.75rem 1rem 1rem;
   text-align: center;
   position: relative;
+  margin-left: calc(-1 * env(safe-area-inset-left));
+  margin-right: calc(-1 * env(safe-area-inset-right));
+  padding-left: calc(1rem + env(safe-area-inset-left));
+  padding-right: calc(1rem + env(safe-area-inset-right));
 }
 
+/* ── LOGO — top-right reset button ── */
+.logo-btn {
+  position: absolute;
+  top: 0.65rem;
+  right: calc(0.75rem + env(safe-area-inset-right));
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  border-radius: 14px;
+}
+
+.logo-btn:active { opacity: 0.7; }
+
 .logo {
-  width: 64px;
-  height: 64px;
-  margin: 0 auto 0.4rem;
+  width: 52px;
+  height: 52px;
   display: block;
-  border-radius: 16px;
+  border-radius: 14px;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.35);
 }
 
 header h1 { margin: 0 0 0.1rem; font-size: 1.25rem; }
@@ -54,11 +84,11 @@ header p  { margin: 0; font-size: 0.85rem; opacity: 0.85; }
 .info-button {
   position: absolute;
   top: 0.75rem;
-  right: 0.75rem;
+  left: 0.75rem;
   width: 32px;
   height: 32px;
   border-radius: 50%;
-  border: 2px solid white;
+  border: 2px solid rgba(255,255,255,0.7);
   background: transparent;
   color: white;
   font-weight: 700;
@@ -72,7 +102,7 @@ header p  { margin: 0; font-size: 0.85rem; opacity: 0.85; }
 
 /* ── SEARCH BAR ── */
 .search-wrap {
-  background: var(--nhs-blue-2);
+  background: var(--brand-dark);
   padding: 0.6rem 1rem;
   position: sticky;
   top: 0;
@@ -152,7 +182,7 @@ header p  { margin: 0; font-size: 0.85rem; opacity: 0.85; }
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.04em;
-  color: var(--nhs-blue);
+  color: var(--brand-dark);
   margin-bottom: 0.15rem;
 }
 
@@ -160,6 +190,12 @@ header p  { margin: 0; font-size: 0.85rem; opacity: 0.85; }
   font-size: 0.95rem;
   font-weight: 700;
   color: #212121;
+}
+
+.result-parent {
+  font-weight: 400;
+  color: #777;
+  font-size: 0.88rem;
 }
 
 .result-snippet {
@@ -205,11 +241,11 @@ header p  { margin: 0; font-size: 0.85rem; opacity: 0.85; }
   color: white;
 }
 
-.nav-button.lscs       { background: var(--nhs-blue); }
-.nav-button.labour     { background: var(--nhs-blue-2); }
-.nav-button.procedures { background: var(--nhs-blue-3); }
-.nav-button.emergencies{ background: var(--nhs-blue-emergency); }
-.nav-button.contacts   { background: var(--nhs-blue); }
+.nav-button.lscs       { background: var(--brand-dark); }
+.nav-button.labour     { background: var(--brand-mid); }
+.nav-button.procedures { background: var(--brand-light); }
+.nav-button.emergencies{ background: var(--brand-deep); }
+.nav-button.contacts   { background: var(--brand-dark); }
 
 .nav-button.open { filter: brightness(0.88); }
 
@@ -249,7 +285,7 @@ details:last-child { border-bottom: none; }
 
 summary {
   font-weight: 700;
-  color: #003087;
+  color: var(--brand-dark);
   cursor: pointer;
   list-style: none;
   display: flex;
@@ -263,8 +299,8 @@ summary::before {
   display: inline-block;
   width: 0.5rem;
   height: 0.5rem;
-  border-right: 2px solid #003087;
-  border-bottom: 2px solid #003087;
+  border-right: 2px solid var(--brand-dark);
+  border-bottom: 2px solid var(--brand-dark);
   transform: rotate(-45deg);
   transition: transform 0.2s;
   flex-shrink: 0;
@@ -304,9 +340,9 @@ li { margin-bottom: 0.25rem; }
 details.nested {
   padding: 0.55rem 0.75rem 0.55rem 1rem;
   border-bottom: 1px solid #eef0f3;
-  border-left: 3px solid #c8d8f0;
+  border-left: 3px solid var(--brand-accent);
   margin: 0;
-  background: #f8fafc;
+  background: #f0f5fb;
 }
 
 details.nested:last-child {
@@ -316,11 +352,11 @@ details.nested:last-child {
 details.nested > summary {
   font-size: 0.95rem;
   font-weight: 700;
-  color: #004080;
+  color: var(--brand-mid);
 }
 
 details.nested > summary::before {
-  border-color: #004080;
+  border-color: var(--brand-mid);
   width: 0.45rem;
   height: 0.45rem;
 }
@@ -345,7 +381,7 @@ details.nested ul {
   flex-shrink: 0;
   width: 2.2rem;
   height: 2.2rem;
-  background: var(--nhs-blue-emergency);
+  background: var(--brand-deep);
   border-radius: 50%;
   display: flex;
   align-items: center;
@@ -378,7 +414,7 @@ details.nested ul {
   display: inline-flex;
   align-items: center;
   gap: 0.4rem;
-  background: var(--nhs-blue-emergency);
+  background: var(--brand-deep);
   color: white;
   border: none;
   border-radius: 6px;
@@ -389,7 +425,7 @@ details.nested ul {
   transition: background 0.15s;
 }
 
-.qrh-btn:hover { background: #001f3f; }
+.qrh-btn:hover { background: var(--brand-dark); }
 
 .qrh-btn-arrow {
   font-size: 1rem;
@@ -425,10 +461,10 @@ details.nested ul {
   color: #212121;
 }
 .modal-content h2 { margin-top: 0; font-size: 1.2rem; }
-.modal-content a  { color: var(--nhs-blue); font-weight: 600; }
+.modal-content a  { color: var(--brand-dark); font-weight: 600; }
 
 .modal-close {
-  background: var(--nhs-blue);
+  background: var(--brand-dark);
   color: white;
   border: none;
   padding: 0.5rem 0.75rem;
@@ -449,7 +485,7 @@ details.nested ul {
 #pdfOverlay.open { display: flex; }
 
 .pdf-toolbar {
-  background: var(--nhs-blue);
+  background: var(--brand-dark);
   color: white;
   display: flex;
   align-items: center;
@@ -508,11 +544,13 @@ details.nested ul {
 
 <!-- ═══════════════ HEADER ═══════════════ -->
 <header>
-  <img src="C817DF9A-E244-4105-A57A-6C82C5264252.png" alt="App logo" class="logo">
-  <button class="info-button" aria-label="Information">
+  <button class="info-button" aria-label="Information" id="infoBtn">
     <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" width="18" height="18">
       <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z" fill="currentColor"/>
     </svg>
+  </button>
+  <button class="logo-btn" id="resetBtn" aria-label="Reset — close all sections">
+    <img src="C817DF9A-E244-4105-A57A-6C82C5264252.png" alt="App logo" class="logo">
   </button>
   <h1>LGT Obstetric Anaesthesia</h1>
   <p>Quick Reference Guide</p>
@@ -524,16 +562,16 @@ details.nested ul {
     <input
       type="search"
       id="searchInput"
-      placeholder="Search guidelines…"
+      placeholder="Search guidance…"
       autocomplete="off"
       autocorrect="off"
       spellcheck="false"
-      aria-label="Search guidelines"
+      aria-label="Search guidance"
       aria-controls="searchResults"
       aria-autocomplete="list"
     >
     <button class="search-clear" id="searchClear" aria-label="Clear search">✕</button>
-    <div id="searchResults" role="listbox" aria-label="Search results"></div>
+    <div id="searchResults" role="listbox" aria-label="Guidance search results"></div>
   </div>
 </div>
 
@@ -1095,10 +1133,22 @@ details.nested ul {
     document.querySelectorAll('.section').forEach(section => {
       const sectionId = section.id;
       section.querySelectorAll('details').forEach(det => {
-        const summary = det.querySelector('summary');
-        const title   = summary ? summary.textContent.trim() : '';
-        const text    = det.textContent.trim();
-        index.push({ sectionId, title, text, element: det });
+        const summary  = det.querySelector(':scope > summary');
+        const title    = summary ? summary.textContent.trim() : '';
+        const isNested = det.classList.contains('nested');
+        const parentTitle = isNested
+          ? (det.closest('details.has-nested')?.querySelector(':scope > summary')?.textContent.trim() || '')
+          : '';
+        /* For nested items, only index the text directly inside this details
+           (not children), to avoid double-matching with parent */
+        const text = isNested
+          ? det.textContent.trim()
+          : det.querySelector('.nested-details')
+            /* has-nested parent: strip out nested children text so it only
+               matches on its own summary text, not on child content */
+            ? (summary ? summary.textContent.trim() : '')
+            : det.textContent.trim();
+        index.push({ sectionId, title, parentTitle, isNested, text, element: det });
       });
     });
     return index;
@@ -1142,22 +1192,27 @@ details.nested ul {
       return;
     }
 
-    resultsBox.innerHTML = hits.map((hit, i) => `
-      <div class="result-item"
-           role="option"
-           tabindex="0"
-           data-index="${i}"
-           data-section="${hit.sectionId}">
-        <div class="result-section">${SECTION_LABELS[hit.sectionId] || hit.sectionId}</div>
-        <div class="result-title">${highlight(hit.title, term)}</div>
-        <div class="result-snippet">${snippet(hit.text, term)}</div>
-      </div>
-    `).join('');
+    /* Assign sequential indices before rendering */
+    resultsBox._hits = hits;
+
+    resultsBox.innerHTML = hits.map((hit, i) => {
+      const titleHtml = hit.parentTitle
+        ? `<span class="result-parent">${hit.parentTitle}</span> › ${highlight(hit.title, term)}`
+        : highlight(hit.title, term);
+      return `
+        <div class="result-item"
+             role="option"
+             tabindex="0"
+             data-index="${i}"
+             data-section="${hit.sectionId}">
+          <div class="result-section">${SECTION_LABELS[hit.sectionId] || hit.sectionId}</div>
+          <div class="result-title">${titleHtml}</div>
+          <div class="result-snippet">${snippet(hit.text, term)}</div>
+        </div>
+      `;
+    }).join('');
 
     resultsBox.classList.add('visible');
-
-    /* Store hits array so click handler can reference them */
-    resultsBox._hits = hits;
   }
 
   function closeResults() {
@@ -1327,7 +1382,7 @@ details.nested ul {
   /* ════════════════════════════════════════
      4. INFO MODAL
   ════════════════════════════════════════ */
-  const infoButton = document.querySelector('.info-button');
+  const infoButton = document.getElementById('infoBtn');
   const infoModal  = document.getElementById('infoModal');
   const modalClose = document.getElementById('modalClose');
 
@@ -1346,6 +1401,28 @@ details.nested ul {
       infoModal.classList.remove('open');
       infoModal.setAttribute('aria-hidden', 'true');
     }
+  });
+
+  /* ════════════════════════════════════════
+     5. RESET BUTTON (logo tap)
+        Closes all sections, details, clears
+        search, scrolls to top.
+  ════════════════════════════════════════ */
+  document.getElementById('resetBtn').addEventListener('click', () => {
+    /* Close all nav sections */
+    closeAll();
+    localStorage.removeItem('openSection');
+
+    /* Close all open details */
+    document.querySelectorAll('details[open]').forEach(d => d.removeAttribute('open'));
+
+    /* Clear search */
+    searchInput.value = '';
+    searchClear.style.display = 'none';
+    closeResults();
+
+    /* Scroll to top */
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   });
 
   /* ════════════════════════════════════════
