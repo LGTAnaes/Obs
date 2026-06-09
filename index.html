@@ -9,14 +9,14 @@
 
 <style>
 :root {
-  --brand-dark:   #1E3A8A;   /* dark navy — figure colour in logo */
+  --brand-bg:     #2B6FE6;   /* logo royal blue — header only */
+  --brand-dark:   #1E3A8A;   /* dark navy */
   --brand-mid:    #1D4ED8;   /* mid royal blue */
-  --brand-light:  #2563EB;   /* slightly lighter royal blue */
-  --brand-accent: #3B82F6;   /* bright accent blue */
-  --brand-deep:   #1e3270;   /* deepest navy for emergencies / deep elements */
-  --brand-bg:     #2B6FE6;   /* logo background — used as header */
+  --brand-light:  #2563EB;   /* lighter royal blue */
+  --brand-accent: #3B82F6;   /* bright accent */
+  --brand-deep:   #1e3270;   /* deepest navy */
   --nhs-grey: #425563;
-  --bg: #EBF2FC;             /* very light tint of logo blue for page background */
+  --bg: #f4f6f8;             /* restored neutral grey */
   --card: #ffffff;
   --highlight: #fff176;
   --highlight-border: #f9a825;
@@ -25,7 +25,6 @@
 *, *::before, *::after { box-sizing: border-box; }
 
 html {
-  /* Extend theme colour into iOS/Android status bar & safe areas */
   background: var(--brand-bg);
 }
 
@@ -45,7 +44,7 @@ body {
 header {
   background: var(--brand-bg);
   color: white;
-  padding: 0.75rem 1rem 1rem;
+  padding: 1rem 1rem 1.25rem;
   text-align: center;
   position: relative;
   margin-left: calc(-1 * env(safe-area-inset-left));
@@ -54,39 +53,39 @@ header {
   padding-right: calc(1rem + env(safe-area-inset-right));
 }
 
-/* ── LOGO — top-right reset button ── */
+/* ── LOGO — top-left reset button ── */
 .logo-btn {
   position: absolute;
-  top: 0.65rem;
-  right: calc(0.75rem + env(safe-area-inset-right));
+  top: 0.75rem;
+  left: calc(0.85rem + env(safe-area-inset-left));
   background: none;
   border: none;
   padding: 0;
   cursor: pointer;
   -webkit-tap-highlight-color: transparent;
-  border-radius: 14px;
+  border-radius: 16px;
 }
 
 .logo-btn:active { opacity: 0.7; }
 
 .logo {
-  width: 52px;
-  height: 52px;
+  width: 60px;
+  height: 60px;
   display: block;
-  border-radius: 14px;
-  box-shadow: 0 1px 4px rgba(0,0,0,0.35);
+  border-radius: 16px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.35);
 }
 
-header h1 { margin: 0 0 0.1rem; font-size: 1.25rem; }
-header p  { margin: 0; font-size: 0.85rem; opacity: 0.85; }
+header h1 { margin: 0 0 0.2rem; font-size: 1.4rem; }
+header p  { margin: 0; font-size: 0.95rem; opacity: 0.85; }
 
-/* ── INFO BUTTON ── */
+/* ── INFO BUTTON — top-right ── */
 .info-button {
   position: absolute;
-  top: 0.75rem;
-  left: 0.75rem;
-  width: 32px;
-  height: 32px;
+  top: 0.85rem;
+  right: calc(0.85rem + env(safe-area-inset-right));
+  width: 40px;
+  height: 40px;
   border-radius: 50%;
   border: 2px solid rgba(255,255,255,0.7);
   background: transparent;
@@ -103,7 +102,7 @@ header p  { margin: 0; font-size: 0.85rem; opacity: 0.85; }
 /* ── SEARCH BAR ── */
 .search-wrap {
   background: var(--brand-dark);
-  padding: 0.6rem 1rem;
+  padding: 0.75rem 1rem;
   position: sticky;
   top: 0;
   z-index: 100;
@@ -117,10 +116,10 @@ header p  { margin: 0; font-size: 0.85rem; opacity: 0.85; }
 
 #searchInput {
   width: 100%;
-  padding: 0.55rem 2.4rem 0.55rem 0.85rem;
+  padding: 0.75rem 2.8rem 0.75rem 1rem;
   border: none;
-  border-radius: 6px;
-  font-size: 1rem;
+  border-radius: 8px;
+  font-size: 1.05rem;
   background: white;
   color: #212121;
   outline: none;
@@ -132,17 +131,17 @@ header p  { margin: 0; font-size: 0.85rem; opacity: 0.85; }
 
 .search-clear {
   position: absolute;
-  right: 0.6rem;
+  right: 0.7rem;
   top: 50%;
   transform: translateY(-50%);
   background: none;
   border: none;
-  font-size: 1.2rem;
+  font-size: 1.3rem;
   color: #888;
   cursor: pointer;
   display: none;
   line-height: 1;
-  padding: 0 0.2rem;
+  padding: 0.2rem;
 }
 
 /* ── SEARCH RESULTS DROPDOWN ── */
@@ -163,7 +162,7 @@ header p  { margin: 0; font-size: 0.85rem; opacity: 0.85; }
 #searchResults.visible { display: block; }
 
 .result-item {
-  padding: 0.65rem 0.9rem;
+  padding: 0.85rem 1rem;
   cursor: pointer;
   border-bottom: 1px solid #eee;
   transition: background 0.15s;
@@ -178,16 +177,16 @@ header p  { margin: 0; font-size: 0.85rem; opacity: 0.85; }
 }
 
 .result-section {
-  font-size: 0.72rem;
+  font-size: 0.75rem;
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.04em;
   color: var(--brand-dark);
-  margin-bottom: 0.15rem;
+  margin-bottom: 0.2rem;
 }
 
 .result-title {
-  font-size: 0.95rem;
+  font-size: 1rem;
   font-weight: 700;
   color: #212121;
 }
@@ -195,13 +194,13 @@ header p  { margin: 0; font-size: 0.85rem; opacity: 0.85; }
 .result-parent {
   font-weight: 400;
   color: #777;
-  font-size: 0.88rem;
+  font-size: 0.9rem;
 }
 
 .result-snippet {
-  font-size: 0.82rem;
+  font-size: 0.88rem;
   color: #555;
-  margin-top: 0.15rem;
+  margin-top: 0.2rem;
 }
 
 .result-snippet mark {
@@ -212,50 +211,71 @@ header p  { margin: 0; font-size: 0.85rem; opacity: 0.85; }
 }
 
 .no-results {
-  padding: 0.75rem 0.9rem;
+  padding: 1rem;
   color: #666;
-  font-size: 0.9rem;
+  font-size: 0.95rem;
 }
 
 /* ── LAYOUT ── */
 .container {
   max-width: 900px;
   margin: auto;
-  padding: 1rem;
+  padding: 1rem 0.9rem;
 }
 
 /* ── NAV BUTTONS ── */
 .nav-button {
   width: 100%;
   border: none;
-  padding: 0.9rem 1rem;
-  margin-bottom: 0.3rem;
-  font-size: 1.05rem;
+  padding: 1.1rem 1.2rem;
+  margin-bottom: 0.5rem;
+  font-size: 1.15rem;
   font-weight: 700;
-  border-radius: 6px;
+  border-radius: 10px;
   cursor: pointer;
   text-align: left;
   display: flex;
   justify-content: space-between;
   align-items: center;
   color: white;
+  letter-spacing: 0.01em;
 }
 
-.nav-button.lscs       { background: var(--brand-dark); }
-.nav-button.labour     { background: var(--brand-mid); }
-.nav-button.procedures { background: var(--brand-light); }
-.nav-button.emergencies{ background: var(--brand-deep); }
-.nav-button.contacts   { background: var(--brand-dark); }
+/* ── NAV BUTTON ICON + LABEL layout ── */
+.nav-icon {
+  flex-shrink: 0;
+  width: 2.2rem;
+  height: 2.2rem;
+  background: rgba(255,255,255,0.18);
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 0.1rem;
+}
+
+.nav-icon svg {
+  width: 1.35rem;
+  height: 1.35rem;
+}
+
+.nav-label {
+  flex: 1;
+}
+.nav-button.labour      { background: #0369A1; }  /* teal-blue   — Labour */
+.nav-button.procedures  { background: #0F766E; }  /* teal-green  — Procedures */
+.nav-button.emergencies { background: #B91C1C; }  /* red         — Emergencies */
+.nav-button.contacts    { background: #4338CA; }  /* indigo      — Contacts */
 
 .nav-button.open { filter: brightness(0.88); }
 
 /* Chevron */
 .chevron {
   flex-shrink: 0;
-  width: 0.6rem;
-  height: 0.6rem;
-  border-right: 2px solid white;
-  border-bottom: 2px solid white;
+  width: 0.7rem;
+  height: 0.7rem;
+  border-right: 2.5px solid white;
+  border-bottom: 2.5px solid white;
   transform: rotate(-45deg);
   transition: transform 0.25s ease;
 }
@@ -264,8 +284,8 @@ header p  { margin: 0; font-size: 0.85rem; opacity: 0.85; }
 /* ── ACCORDION SECTIONS ── */
 .section {
   background: var(--card);
-  border-radius: 6px;
-  margin-bottom: 0.75rem;
+  border-radius: 10px;
+  margin-bottom: 0.5rem;
   overflow: hidden;
   max-height: 0;
   opacity: 0;
@@ -278,7 +298,7 @@ header p  { margin: 0; font-size: 0.85rem; opacity: 0.85; }
 
 /* ── DETAILS / SUMMARY ── */
 details {
-  padding: 0.75rem 1rem;
+  padding: 1rem 1.1rem;
   border-bottom: 1px solid #eef0f3;
 }
 details:last-child { border-bottom: none; }
@@ -290,17 +310,19 @@ summary {
   list-style: none;
   display: flex;
   align-items: center;
-  gap: 0.5rem;
+  gap: 0.6rem;
+  font-size: 1.05rem;
+  line-height: 1.35;
 }
 summary::-webkit-details-marker { display: none; }
 
 summary::before {
   content: '';
   display: inline-block;
-  width: 0.5rem;
-  height: 0.5rem;
-  border-right: 2px solid var(--brand-dark);
-  border-bottom: 2px solid var(--brand-dark);
+  width: 0.55rem;
+  height: 0.55rem;
+  border-right: 2.5px solid var(--brand-dark);
+  border-bottom: 2.5px solid var(--brand-dark);
   transform: rotate(-45deg);
   transition: transform 0.2s;
   flex-shrink: 0;
@@ -327,20 +349,20 @@ mark.search-term {
   padding: 0 1px;
 }
 
-ul { padding-left: 1.3rem; margin: 0.4rem 0; }
+ul { padding-left: 1.4rem; margin: 0.5rem 0; }
 ul ul { margin-left: 0.5rem; }
-li { margin-bottom: 0.25rem; }
+li { margin-bottom: 0.4rem; font-size: 1rem; line-height: 1.45; }
 
 /* ── NESTED DETAILS (e.g. Epidural Troubleshooting sub-items) ── */
 .nested-details {
-  margin-top: 0.5rem;
+  margin-top: 0.6rem;
   border-top: 1px solid #eef0f3;
 }
 
 details.nested {
-  padding: 0.55rem 0.75rem 0.55rem 1rem;
+  padding: 0.8rem 0.9rem 0.8rem 1.1rem;
   border-bottom: 1px solid #eef0f3;
-  border-left: 3px solid var(--brand-accent);
+  border-left: 4px solid var(--brand-accent);
   margin: 0;
   background: #f0f5fb;
 }
@@ -350,15 +372,15 @@ details.nested:last-child {
 }
 
 details.nested > summary {
-  font-size: 0.95rem;
+  font-size: 1rem;
   font-weight: 700;
   color: var(--brand-mid);
 }
 
 details.nested > summary::before {
   border-color: var(--brand-mid);
-  width: 0.45rem;
-  height: 0.45rem;
+  width: 0.5rem;
+  height: 0.5rem;
 }
 
 details.nested[open] > summary::before {
@@ -366,7 +388,7 @@ details.nested[open] > summary::before {
 }
 
 details.nested ul {
-  margin-top: 0.4rem;
+  margin-top: 0.5rem;
 }
 
 /* ── OAA QRH CARD ── */
@@ -374,14 +396,14 @@ details.nested ul {
   display: flex;
   gap: 1rem;
   align-items: flex-start;
-  padding: 1.1rem 1rem;
+  padding: 1.3rem 1.1rem;
 }
 
 .qrh-icon {
   flex-shrink: 0;
-  width: 2.2rem;
-  height: 2.2rem;
-  background: var(--brand-deep);
+  width: 2.6rem;
+  height: 2.6rem;
+  background: #B91C1C;
   border-radius: 50%;
   display: flex;
   align-items: center;
@@ -390,42 +412,42 @@ details.nested ul {
 }
 
 .qrh-icon svg {
-  width: 1.2rem;
-  height: 1.2rem;
+  width: 1.4rem;
+  height: 1.4rem;
 }
 
 .qrh-body { flex: 1; }
 
 .qrh-title {
   font-weight: 700;
-  font-size: 1rem;
+  font-size: 1.05rem;
   color: #212121;
-  margin: 0 0 0.3rem;
+  margin: 0 0 0.35rem;
 }
 
 .qrh-desc {
-  font-size: 0.875rem;
+  font-size: 0.95rem;
   color: #555;
-  margin: 0 0 0.75rem;
-  line-height: 1.4;
+  margin: 0 0 0.9rem;
+  line-height: 1.45;
 }
 
 .qrh-btn {
   display: inline-flex;
   align-items: center;
   gap: 0.4rem;
-  background: var(--brand-deep);
+  background: #B91C1C;
   color: white;
   border: none;
-  border-radius: 6px;
-  padding: 0.5rem 0.9rem;
-  font-size: 0.9rem;
+  border-radius: 8px;
+  padding: 0.65rem 1.1rem;
+  font-size: 1rem;
   font-weight: 700;
   cursor: pointer;
   transition: background 0.15s;
 }
 
-.qrh-btn:hover { background: var(--brand-dark); }
+.qrh-btn:hover { background: #991B1B; }
 
 .qrh-btn-arrow {
   font-size: 1rem;
@@ -435,9 +457,9 @@ details.nested ul {
 /* ── FOOTER ── */
 .footer {
   text-align: center;
-  font-size: 0.8rem;
+  font-size: 0.875rem;
   color: var(--nhs-grey);
-  padding: 1rem;
+  padding: 1.25rem 1rem;
 }
 
 /* ── INFO MODAL ── */
@@ -580,7 +602,17 @@ details.nested ul {
 
   <!-- ── Caesarean delivery ── -->
   <button class="nav-button lscs" data-target="lscs">
-    <span>Anaesthesia for Caesarean delivery</span><span class="chevron"></span>
+    <span class="nav-icon" aria-hidden="true">
+      <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <!-- Scalpel / surgical blade -->
+        <path d="M19 3L5 17l2 2 2-2 1 3 7-7-3-1 2-2 2 2 3-9z" fill="white" opacity="0.9"/>
+        <!-- Baby outline -->
+        <circle cx="8" cy="7" r="2.2" fill="white" opacity="0.9"/>
+        <path d="M5 13c0-1.66 1.34-3 3-3s3 1.34 3 3v1H5v-1z" fill="white" opacity="0.9"/>
+      </svg>
+    </span>
+    <span class="nav-label">Anaesthesia for Caesarean delivery</span>
+    <span class="chevron"></span>
   </button>
   <div id="lscs" class="section">
 
@@ -773,7 +805,16 @@ details.nested ul {
 
   <!-- ── Other procedures ── -->
   <button class="nav-button procedures" data-target="procedures">
-    <span>Other Obstetric Procedures</span><span class="chevron"></span>
+    <span class="nav-icon" aria-hidden="true">
+      <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <!-- Forceps / medical tool -->
+        <path d="M7 2l1.5 6-2 2 5 5 2-2 6 1.5-1-3-4-4-1 1-4-4 1-1L7 2z" fill="white" opacity="0.9"/>
+        <!-- Second instrument -->
+        <path d="M3 21l5-5M14 3l7 7" stroke="white" stroke-width="2" stroke-linecap="round" opacity="0.75"/>
+      </svg>
+    </span>
+    <span class="nav-label">Other Obstetric Procedures</span>
+    <span class="chevron"></span>
   </button>
   <div id="procedures" class="section">
 
@@ -834,7 +875,14 @@ details.nested ul {
 
   <!-- ── Labour analgesia ── -->
   <button class="nav-button labour" data-target="labour">
-    <span>Labour Analgesia</span><span class="chevron"></span>
+    <span class="nav-icon" aria-hidden="true">
+      <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <!-- CTG / heartbeat waveform -->
+        <polyline points="2,12 5,12 7,6 9,18 11,10 13,14 15,12 22,12" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none" opacity="0.9"/>
+      </svg>
+    </span>
+    <span class="nav-label">Labour Analgesia</span>
+    <span class="chevron"></span>
   </button>
   <div id="labour" class="section">
 
@@ -950,7 +998,17 @@ details.nested ul {
 
   <!-- ── Emergencies ── -->
   <button class="nav-button emergencies" data-target="emergencies">
-    <span>Emergencies</span><span class="chevron"></span>
+    <span class="nav-icon" aria-hidden="true">
+      <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <!-- Warning triangle -->
+        <path d="M12 2L2 20h20L12 2z" stroke="white" stroke-width="2" stroke-linejoin="round" fill="white" fill-opacity="0.15" opacity="0.9"/>
+        <!-- Exclamation mark -->
+        <line x1="12" y1="9" x2="12" y2="14" stroke="white" stroke-width="2.5" stroke-linecap="round"/>
+        <circle cx="12" cy="17" r="1.2" fill="white"/>
+      </svg>
+    </span>
+    <span class="nav-label">Emergencies</span>
+    <span class="chevron"></span>
   </button>
   <div id="emergencies" class="section">
 
@@ -973,7 +1031,14 @@ details.nested ul {
 
   <!-- ── Contacts ── -->
   <button class="nav-button contacts" data-target="contacts">
-    <span>Key Contacts</span><span class="chevron"></span>
+    <span class="nav-icon" aria-hidden="true">
+      <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <!-- Phone handset -->
+        <path d="M6.6 10.8c1.4 2.8 3.8 5.1 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1-9.4 0-17-7.6-17-17 0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.3.2 2.5.6 3.6.1.3 0 .7-.2 1L6.6 10.8z" fill="white" opacity="0.9"/>
+      </svg>
+    </span>
+    <span class="nav-label">Key Contacts</span>
+    <span class="chevron"></span>
   </button>
   <div id="contacts" class="section">
 
