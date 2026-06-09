@@ -4,7 +4,6 @@
 <meta charset="UTF-8">
 <title>LGT Obstetric Anaesthesia – Quick Reference</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
 <link rel="manifest" href="manifest.json">
 <meta name="theme-color" content="#005EB8">
 
@@ -17,7 +16,11 @@
   --nhs-grey: #425563;
   --bg: #f4f6f8;
   --card: #ffffff;
+  --highlight: #fff176;
+  --highlight-border: #f9a825;
 }
+
+*, *::before, *::after { box-sizing: border-box; }
 
 body {
   margin: 0;
@@ -27,13 +30,13 @@ body {
   line-height: 1.45;
 }
 
-/* HEADER — FIXED */
+/* ── HEADER ── */
 header {
   background: var(--nhs-blue);
   color: white;
   padding: 0.75rem 1rem 1rem;
   text-align: center;
-  position: relative; /* 🔑 critical fix */
+  position: relative;
 }
 
 .logo {
@@ -43,7 +46,10 @@ header {
   display: block;
 }
 
-/* INFO BUTTON */
+header h1 { margin: 0 0 0.1rem; font-size: 1.25rem; }
+header p  { margin: 0; font-size: 0.85rem; opacity: 0.85; }
+
+/* ── INFO BUTTON ── */
 .info-button {
   position: absolute;
   top: 0.75rem;
@@ -57,60 +63,131 @@ header {
   font-weight: 700;
   font-size: 1rem;
   cursor: pointer;
-}
-
-/* INFO MODAL */
-.modal {
-  position: fixed;
-  inset: 0;
-  background: rgba(0,0,0,0.5);
-  display: none;
+  line-height: 1;
+  display: flex;
   align-items: center;
   justify-content: center;
-  z-index: 1000;
 }
 
-.modal.open {
-  display: flex;
+/* ── SEARCH BAR ── */
+.search-wrap {
+  background: var(--nhs-blue-2);
+  padding: 0.6rem 1rem;
+  position: sticky;
+  top: 0;
+  z-index: 100;
 }
 
-.modal-content {
+.search-inner {
+  max-width: 900px;
+  margin: auto;
+  position: relative;
+}
+
+#searchInput {
+  width: 100%;
+  padding: 0.55rem 2.4rem 0.55rem 0.85rem;
+  border: none;
+  border-radius: 6px;
+  font-size: 1rem;
   background: white;
-  max-width: 520px;
-  width: 90%;
-  border-radius: 8px;
-  padding: 1rem 1.25rem;
+  color: #212121;
+  outline: none;
+}
+
+#searchInput:focus {
+  box-shadow: 0 0 0 3px rgba(255,255,255,0.5);
+}
+
+.search-clear {
+  position: absolute;
+  right: 0.6rem;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  font-size: 1.2rem;
+  color: #888;
+  cursor: pointer;
+  display: none;
+  line-height: 1;
+  padding: 0 0.2rem;
+}
+
+/* ── SEARCH RESULTS DROPDOWN ── */
+#searchResults {
+  position: absolute;
+  top: calc(100% + 4px);
+  left: 0;
+  right: 0;
+  background: white;
+  border-radius: 6px;
+  box-shadow: 0 6px 24px rgba(0,0,0,0.18);
+  max-height: 60vh;
+  overflow-y: auto;
+  display: none;
+  z-index: 200;
+}
+
+#searchResults.visible { display: block; }
+
+.result-item {
+  padding: 0.65rem 0.9rem;
+  cursor: pointer;
+  border-bottom: 1px solid #eee;
+  transition: background 0.15s;
+}
+
+.result-item:last-child { border-bottom: none; }
+
+.result-item:hover,
+.result-item:focus {
+  background: #e8f0fe;
+  outline: none;
+}
+
+.result-section {
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--nhs-blue);
+  margin-bottom: 0.15rem;
+}
+
+.result-title {
+  font-size: 0.95rem;
+  font-weight: 700;
   color: #212121;
 }
 
-.modal-content h2 {
-  margin-top: 0;
-  font-size: 1.2rem;
+.result-snippet {
+  font-size: 0.82rem;
+  color: #555;
+  margin-top: 0.15rem;
 }
 
-.modal-content a {
-  color: #005EB8;
-  font-weight: 600;
+.result-snippet mark {
+  background: var(--highlight);
+  color: inherit;
+  border-radius: 2px;
+  padding: 0 1px;
 }
 
-.modal-close {
-  background: #005EB8;
-  color: white;
-  border: none;
-  padding: 0.5rem 0.75rem;
-  border-radius: 4px;
-  margin-top: 1rem;
-  cursor: pointer;
+.no-results {
+  padding: 0.75rem 0.9rem;
+  color: #666;
+  font-size: 0.9rem;
 }
 
-/* LAYOUT */
+/* ── LAYOUT ── */
 .container {
   max-width: 900px;
   margin: auto;
   padding: 1rem;
 }
 
-/* BUTTONS */
+/* ── NAV BUTTONS ── */
 .nav-button {
   width: 100%;
   border: none;
@@ -127,18 +204,17 @@ header {
   color: white;
 }
 
-.nav-button.lscs { background: var(--nhs-blue); }
-.nav-button.labour { background: var(--nhs-blue-2); }
+.nav-button.lscs       { background: var(--nhs-blue); }
+.nav-button.labour     { background: var(--nhs-blue-2); }
 .nav-button.procedures { background: var(--nhs-blue-3); }
-.nav-button.emergencies { background: var(--nhs-blue-emergency); }
-.nav-button.contacts { background: var(--nhs-blue); }
+.nav-button.emergencies{ background: var(--nhs-blue-emergency); }
+.nav-button.contacts   { background: var(--nhs-blue); }
 
-.nav-button.open {
-  filter: brightness(0.9);
-}
+.nav-button.open { filter: brightness(0.88); }
 
 /* Chevron */
 .chevron {
+  flex-shrink: 0;
   width: 0.6rem;
   height: 0.6rem;
   border-right: 2px solid white;
@@ -146,12 +222,9 @@ header {
   transform: rotate(-45deg);
   transition: transform 0.25s ease;
 }
+.nav-button.open .chevron { transform: rotate(45deg); }
 
-.nav-button.open .chevron {
-  transform: rotate(45deg);
-}
-
-/* ACCORDION */
+/* ── ACCORDION SECTIONS ── */
 .section {
   background: var(--card);
   border-radius: 6px;
@@ -161,525 +234,1100 @@ header {
   opacity: 0;
   transition: max-height 0.45s ease, opacity 0.25s ease;
 }
-
 .section.open {
-  max-height: 5000px;
+  max-height: 9999px;
   opacity: 1;
 }
 
+/* ── DETAILS / SUMMARY ── */
 details {
   padding: 0.75rem 1rem;
+  border-bottom: 1px solid #eef0f3;
 }
+details:last-child { border-bottom: none; }
 
 summary {
   font-weight: 700;
   color: #003087;
   cursor: pointer;
+  list-style: none;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+summary::-webkit-details-marker { display: none; }
+
+summary::before {
+  content: '';
+  display: inline-block;
+  width: 0.5rem;
+  height: 0.5rem;
+  border-right: 2px solid #003087;
+  border-bottom: 2px solid #003087;
+  transform: rotate(-45deg);
+  transition: transform 0.2s;
+  flex-shrink: 0;
+  margin-top: 1px;
+}
+details[open] > summary::before { transform: rotate(45deg); }
+
+/* ── HIGHLIGHT (search jump target) ── */
+details.search-highlight {
+  background: #fffde7;
+  border-left: 3px solid var(--highlight-border);
+  animation: pulse-fade 2.5s ease forwards;
 }
 
-ul ul {
-  margin-left: 1.2rem;
+@keyframes pulse-fade {
+  0%   { background: #fff9c4; }
+  40%  { background: #fff9c4; }
+  100% { background: white; }
 }
 
-/* FOOTER */
+mark.search-term {
+  background: var(--highlight);
+  border-radius: 2px;
+  padding: 0 1px;
+}
+
+ul { padding-left: 1.3rem; margin: 0.4rem 0; }
+ul ul { margin-left: 0.5rem; }
+li { margin-bottom: 0.25rem; }
+
+/* ── NESTED DETAILS (e.g. Epidural Troubleshooting sub-items) ── */
+.nested-details {
+  margin-top: 0.5rem;
+  border-top: 1px solid #eef0f3;
+}
+
+details.nested {
+  padding: 0.55rem 0.75rem 0.55rem 1rem;
+  border-bottom: 1px solid #eef0f3;
+  border-left: 3px solid #c8d8f0;
+  margin: 0;
+  background: #f8fafc;
+}
+
+details.nested:last-child {
+  border-bottom: none;
+}
+
+details.nested > summary {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: #004080;
+}
+
+details.nested > summary::before {
+  border-color: #004080;
+  width: 0.45rem;
+  height: 0.45rem;
+}
+
+details.nested[open] > summary::before {
+  transform: rotate(45deg);
+}
+
+details.nested ul {
+  margin-top: 0.4rem;
+}
+
+/* ── OAA QRH CARD ── */
+.qrh-card {
+  display: flex;
+  gap: 1rem;
+  align-items: flex-start;
+  padding: 1.1rem 1rem;
+}
+
+.qrh-icon {
+  flex-shrink: 0;
+  width: 2.2rem;
+  height: 2.2rem;
+  background: var(--nhs-blue-emergency);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+}
+
+.qrh-icon svg {
+  width: 1.2rem;
+  height: 1.2rem;
+}
+
+.qrh-body { flex: 1; }
+
+.qrh-title {
+  font-weight: 700;
+  font-size: 1rem;
+  color: #212121;
+  margin: 0 0 0.3rem;
+}
+
+.qrh-desc {
+  font-size: 0.875rem;
+  color: #555;
+  margin: 0 0 0.75rem;
+  line-height: 1.4;
+}
+
+.qrh-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  background: var(--nhs-blue-emergency);
+  color: white;
+  border: none;
+  border-radius: 6px;
+  padding: 0.5rem 0.9rem;
+  font-size: 0.9rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+
+.qrh-btn:hover { background: #001f3f; }
+
+.qrh-btn-arrow {
+  font-size: 1rem;
+  line-height: 1;
+}
+
+/* ── FOOTER ── */
 .footer {
   text-align: center;
   font-size: 0.8rem;
   color: var(--nhs-grey);
   padding: 1rem;
 }
+
+/* ── INFO MODAL ── */
+.modal {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.5);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+.modal.open { display: flex; }
+
+.modal-content {
+  background: white;
+  max-width: 520px;
+  width: 90%;
+  border-radius: 8px;
+  padding: 1rem 1.25rem;
+  color: #212121;
+}
+.modal-content h2 { margin-top: 0; font-size: 1.2rem; }
+.modal-content a  { color: var(--nhs-blue); font-weight: 600; }
+
+.modal-close {
+  background: var(--nhs-blue);
+  color: white;
+  border: none;
+  padding: 0.5rem 0.75rem;
+  border-radius: 4px;
+  margin-top: 1rem;
+  cursor: pointer;
+}
+
+/* ── PDF VIEWER OVERLAY ── */
+#pdfOverlay {
+  position: fixed;
+  inset: 0;
+  background: #fff;
+  z-index: 900;
+  display: none;
+  flex-direction: column;
+}
+#pdfOverlay.open { display: flex; }
+
+.pdf-toolbar {
+  background: var(--nhs-blue);
+  color: white;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.65rem 1rem;
+  flex-shrink: 0;
+}
+
+.pdf-back-btn {
+  background: transparent;
+  border: 2px solid rgba(255,255,255,0.7);
+  color: white;
+  border-radius: 6px;
+  padding: 0.35rem 0.75rem;
+  font-size: 0.95rem;
+  font-weight: 700;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  white-space: nowrap;
+}
+.pdf-back-btn:hover { background: rgba(255,255,255,0.15); }
+
+.pdf-back-arrow {
+  display: inline-block;
+  width: 0.5rem;
+  height: 0.5rem;
+  border-left: 2px solid white;
+  border-bottom: 2px solid white;
+  transform: rotate(45deg);
+}
+
+.pdf-title {
+  font-size: 0.95rem;
+  font-weight: 700;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+#pdfFrame {
+  flex: 1;
+  border: none;
+  width: 100%;
+}
+
+/* ── REDUCED MOTION ── */
+@media (prefers-reduced-motion: reduce) {
+  .section, summary::before, .chevron { transition: none; }
+  details.search-highlight { animation: none; background: #fff9c4; }
+}
 </style>
 </head>
-
 <body>
 
+<!-- ═══════════════ HEADER ═══════════════ -->
 <header>
-  <!-- APP LOGO -->
   <img src="C817DF9A-E244-4105-A57A-6C82C5264252.png" alt="App logo" class="logo">
-
-  <!-- INFO BUTTON -->
   <button class="info-button" aria-label="Information">i</button>
-
   <h1>LGT Obstetric Anaesthesia</h1>
   <p>Quick Reference Guide</p>
 </header>
 
+<!-- ═══════════════ SEARCH ═══════════════ -->
+<div class="search-wrap" role="search">
+  <div class="search-inner">
+    <input
+      type="search"
+      id="searchInput"
+      placeholder="Search guidelines…"
+      autocomplete="off"
+      autocorrect="off"
+      spellcheck="false"
+      aria-label="Search guidelines"
+      aria-controls="searchResults"
+      aria-autocomplete="list"
+    >
+    <button class="search-clear" id="searchClear" aria-label="Clear search">✕</button>
+    <div id="searchResults" role="listbox" aria-label="Search results"></div>
+  </div>
+</div>
+
+<!-- ═══════════════ MAIN CONTENT ═══════════════ -->
 <div class="container">
-  
-<!-- Anaesthesia for Caesaraen delivery -->
-<button class="nav-button lscs" data-target="lscs">
-  <span>Anaesthesia for Caesarean delivery</span><span class="chevron"></span>
-</button>
-<div id="lscs" class="section">
 
-<details>
-<summary>Regional Anaesthesia - Spinal</summary>
-<ul>
-<li>14–16G IV access, warmed fluids running</li>
-<li>2.0–2.5 ml 0.5% heavy bupivacaine + 300 mcg diamorphine</li>
-  <ul> 
-  <li>Alternative to diamorphine is 100mcg PF morphine + 10-15mcg fentanyl</li>
-  </ul>
-<li>Phenylephrine infusion 50mcg/ml started at 40ml/hr</li>
-<li>Aiming bilateral sensory block T4–S3</li>
-</ul>
-</details>
+  <!-- ── Caesarean delivery ── -->
+  <button class="nav-button lscs" data-target="lscs">
+    <span>Anaesthesia for Caesarean delivery</span><span class="chevron"></span>
+  </button>
+  <div id="lscs" class="section">
 
-<details>
-<summary>Regional Anaesthesia - CSE</summary>
-<ul>
-<li>Consider for prolonged surgery or complex medical conditions</li>
-<li>Reduce spinal dose in cardiac disease, short stature, obesity</li>
-<li>Phenylephrine infusion 50mcg/ml started at 40ml/hr</li>
-<li>Tegaderm dressing + mefix strip</li>
-<li>If initial spinal bolus does not achieve desired block height, use 5ml bolus of epidural top-ups and re-assess</li>
-<li>Consider 5-10ml epidural top-up after 75-90 mins if surgery ongoing</li>
-</ul>
-</details>
+    <details>
+      <summary>Regional Anaesthesia – Spinal</summary>
+      <ul>
+        <li>14–16G IV access, warmed fluids running</li>
+        <li>2.0–2.5 ml 0.5% heavy bupivacaine + 300 mcg diamorphine
+          <ul><li>Alternative: 100 mcg PF morphine + 10–15 mcg fentanyl</li></ul>
+        </li>
+        <li>Phenylephrine infusion 50 mcg/ml started at 40 ml/hr</li>
+        <li>Aiming bilateral sensory block T4–S3</li>
+      </ul>
+    </details>
 
-<details>
-<summary>Regional anaesthesia - Epidural Top-Up</summary>
-<ul>
-<li>Only if functioning adequately. If not, remove and place spinal</li>
-<li> Use 1 of the following: </li>
-<ul>
-  <li>0.5% bupivacaine</li>
-  <li>0.75% ropivacaine</li>
-  <li>2% lidocaine + adrenaline 1:200,000 (0.1ml 1:1000 adrenaline drawn up to 20ml with 2% lidocaine)</li>
-</ul>
-<li>Test dose of 3ml, followed by 5ml increments up to a total of 20ml </li>
-<li>Add fentanyl 50–100 mcg to initial bolus</li>
-<li>Diamorphine 3 mg (or PF morphine 3 mg) at end</li>
-</ul>
-</details>
+    <details>
+      <summary>Regional Anaesthesia – CSE</summary>
+      <ul>
+        <li>Consider for prolonged surgery or complex medical conditions</li>
+        <li>Reduce spinal dose in cardiac disease, short stature, obesity</li>
+        <li>Phenylephrine infusion 50 mcg/ml started at 40 ml/hr</li>
+        <li>Tegaderm dressing + Mefix strip</li>
+        <li>If initial spinal bolus does not achieve desired block height, use 5 ml bolus of epidural top-ups and re-assess</li>
+        <li>Consider 5–10 ml epidural top-up after 75–90 mins if surgery ongoing</li>
+      </ul>
+    </details>
 
-<details>
-<summary>Intra-operative pain under regional anaesthesia</summary>
-<ul>
-<li>If patient has epidural, a further top up can be given</li>
-<li>If no epidural, offer GA and convert to GA if patient accepts</li>
-<li>If GA declined, rescue analgesia includes:</li>
-<ul>
-  <li>Alfentanil 200mcg increments, fentanyl 20mcg increments</li>
-  <li>Ketamine 10–20mg IV</li>
-  <li>Nitrous oxide in O₂ (50:50)</li>
-</ul>
-<li>Clearly document the events and discussions with patient</li>
-</ul>
-</details>
+    <details>
+      <summary>Regional Anaesthesia – Epidural Top-Up</summary>
+      <ul>
+        <li>Only if functioning adequately. If not, remove and place spinal</li>
+        <li>Use 1 of the following:
+          <ul>
+            <li>0.5% bupivacaine</li>
+            <li>0.75% ropivacaine</li>
+            <li>2% lidocaine + adrenaline 1:200,000 (0.1 ml 1:1000 adrenaline drawn up to 20 ml with 2% lidocaine)</li>
+          </ul>
+        </li>
+        <li>Test dose of 3 ml, followed by 5 ml increments up to a total of 20 ml</li>
+        <li>Add fentanyl 50–100 mcg to initial bolus</li>
+        <li>Diamorphine 3 mg (or PF morphine 3 mg) at end</li>
+      </ul>
+    </details>
 
-<details>
-<summary>General Anaesthesia</summary>
-<ul>
-<li><strong>Indications</strong></li>
-<ul>
-  <li>Category 1 emergencies</li>
-  <li>Neuraxial contraindicated:</li>
-  <ul>
-    <li>Maternal refusal</li>
-    <li>Maternal coagulopathy</li>
-    <li>CVS instability</li>
-    <li>Maternal sepsis / localised infection</li>
-  </ul>
-  <li>Regional anaesthesia inadequate for surgery</li>
-</ul>
+    <details>
+      <summary>Intra-operative pain under regional anaesthesia</summary>
+      <ul>
+        <li>If patient has epidural, a further top-up can be given</li>
+        <li>If no epidural, offer GA and convert if patient accepts</li>
+        <li>If GA declined, rescue analgesia includes:
+          <ul>
+            <li>Alfentanil 200 mcg increments, fentanyl 20 mcg increments</li>
+            <li>Ketamine 10–20 mg IV</li>
+            <li>Nitrous oxide in O₂ (50:50)</li>
+          </ul>
+        </li>
+        <li>Clearly document the events and discussions with patient</li>
+      </ul>
+    </details>
 
-<li><strong>Management</strong></li>
-<ul>
-  <li>30ml PO sodium citrate</li>
-  <li>14–16G cannula with warm fluids running</li>
-  <li>Ramped position with Oxford Help pillow</li>
-  <li>Suction switched on and accessible</li>
-  <li>Peroxygenation:</li>
-  <ul>
-    <li>Pre-oxygenate with 100% O₂ via facemask</li>
-    <li>Consider HFNO during apnoea</li>
-  </ul>
-  <li>When surgeon is scrubbed and ready, induce:</li>
-  <ul>
-    <li>Propofol or Thiopentone</li>
-    <li>Rocuronium or Suxamethonium</li>
-    <li>Alfentanil up to 1mg for hypertensive mothers</li>
-  </ul>
-  <li>Videolaryngoscopy strongly recommended, size 7 COETT</li>
-  <li>Volatile agent immediately after intubation in 50% N₂O at high flows aiming MAC 1.0</li>
-  <li>Opioid analgesia following delivery (10–15mg IV morphine) + PCA</li>
-  <li>Consider TAP blocks if patient consented (20ml 0.25% bupivacaine each side)</li>
-</ul>
-</ul>
-</details>
+    <details class="has-nested">
+      <summary>General Anaesthesia</summary>
+      <div class="nested-details">
 
-<details>
-<summary>Perioperative Medications for LSCS</summary>
-<ul>
-<summary>Antibiotics (to be given pre-inscision)</summary>
-<ul>
-  <li>Cefuroxime 1.5g IV & Metronidazole 500mg IV</li>
-  <li>Penicillin allergy: Clindamycin 600mg IV & Gentamicin 4mg/kg YV (max. 400mg)</li>
-</ul>
-  
-<summary>Post-op Analgesia</summary></li>
-<ul>
-  <li>Prescribe the 'C-section Medication Protocol' on iCare</li>
-  <ul>
-    <li>Regular:</li>
-    <ul>
-      <li>Paracetamol 1g PO QDS</li>
-      <li>Ibuprofen 400mg PO TDS</li>
-      <li>Morphine MR 10mg PO BD (2 doses only)</li>
-    </ul>
-    <li>PRN:</li>
-    <ul>
-      <li>Morphine IR 10-20mg 4 hourly</li>
-      <li>Ondansetron 4mg IV 8 hourly</li>
-      <li>Cyclizine 50mg PO/IV TDS</li>
-      <li>Naloxone 25mcg SC hourly</li>
-    </ul>
-  </ul>
-</ul>
+        <details class="nested">
+          <summary>Indications</summary>
+          <ul>
+            <li>Category 1 emergencies</li>
+            <li>Neuraxial contraindicated:
+              <ul>
+                <li>Maternal refusal</li>
+                <li>Maternal coagulopathy</li>
+                <li>CVS instability</li>
+                <li>Maternal sepsis / localised infection</li>
+              </ul>
+            </li>
+            <li>Regional anaesthesia inadequate for surgery</li>
+          </ul>
+        </details>
 
-<summary>Uterotonics</summary>
-<ul>
-  <li><strong>Elective:</strong></li>
-  <ul>
-    <li>Carbetocin 100mcg IV</li>
-    <ul>
-      <li>Caution in: asthma, CVS disease, hyponatraemia, migraine, epilepsy</li>
-    </ul>
-    <li>If response inadequate, move onto 2nd line agents</li>
-    <li>If carbetocin contraindicated, oxytocin 3-5U bolus followed by 40in40 infusion @ 10ml/hr</li>
-    <li>TXA 1g IV for all patients</li>
-</ul>
+        <details class="nested">
+          <summary>Management</summary>
+          <ul>
+            <li>30 ml PO sodium citrate</li>
+            <li>14–16G cannula with warm fluids running</li>
+            <li>Ramped position with Oxford HELP pillow</li>
+            <li>Suction switched on and accessible</li>
+            <li>Pre-oxygenation:
+              <ul>
+                <li>Pre-oxygenate with 100% O₂ via facemask</li>
+                <li>Consider HFNO during apnoea</li>
+              </ul>
+            </li>
+            <li>When surgeon is scrubbed and ready, induce:
+              <ul>
+                <li>Propofol or Thiopentone</li>
+                <li>Rocuronium or Suxamethonium</li>
+                <li>Alfentanil up to 1 mg for hypertensive mothers</li>
+              </ul>
+            </li>
+            <li>Videolaryngoscopy strongly recommended, size 7 COETT</li>
+            <li>Volatile agent immediately after intubation in 50% N₂O at high flows aiming MAC 1.0</li>
+            <li>Opioid analgesia following delivery (10–15 mg IV morphine) + PCA</li>
+            <li>Consider TAP blocks if patient consented (20 ml 0.25% bupivacaine each side)</li>
+          </ul>
+        </details>
 
-<li><strong>Emergency:</strong></li>
-  <ul>
-    <li>As per Elective uterotonics</li>
-    <li>Early movement to 2nd line agents as required</li>
-</ul>
-  
-<li><strong>2nd line agents:</strong></li>
-<ul>
-    <li>Ergometrine 500mcg IM</li>
-    <ul>
-      <li>Avoid in PET, hypertension</li>
-      <li>Ensure antiemetics given</li>
-    </ul>
-   
-    <li>Carboprost 250mcg IM</li>
-    <ul>
-      <li>Avoid in Asthma</li>
-      <li>Can repeat every 15mins, up to max 8 doses</li>
-    </ul>
-</ul>
-  
-</details>
-  
+      </div>
+    </details>
+
+    <details class="has-nested">
+      <summary>Perioperative Medications for LSCS</summary>
+      <div class="nested-details">
+
+        <details class="nested">
+          <summary>Antibiotics (pre-incision)</summary>
+          <ul>
+            <li>Cefuroxime 1.5 g IV &amp; Metronidazole 500 mg IV</li>
+            <li>Penicillin allergy: Clindamycin 600 mg IV &amp; Gentamicin 4 mg/kg IV (max 400 mg)</li>
+          </ul>
+        </details>
+
+        <details class="nested">
+          <summary>Post-op Analgesia</summary>
+          <ul>
+            <li>Prescribe the 'C-section Medication Protocol' on iCare
+              <ul>
+                <li><em>Regular:</em>
+                  <ul>
+                    <li>Paracetamol 1 g PO QDS</li>
+                    <li>Ibuprofen 400 mg PO TDS</li>
+                    <li>Morphine MR 10 mg PO BD (2 doses only)</li>
+                  </ul>
+                </li>
+                <li><em>PRN:</em>
+                  <ul>
+                    <li>Morphine IR 10–20 mg 4 hourly</li>
+                    <li>Ondansetron 4 mg IV 8 hourly</li>
+                    <li>Cyclizine 50 mg PO/IV TDS</li>
+                    <li>Naloxone 25 mcg SC hourly</li>
+                  </ul>
+                </li>
+              </ul>
+            </li>
+          </ul>
+        </details>
+
+        <details class="nested">
+          <summary>Uterotonics</summary>
+          <ul>
+            <li><strong>Elective:</strong>
+              <ul>
+                <li>Carbetocin 100 mcg IV
+                  <ul><li>Caution in: asthma, CVS disease, hyponatraemia, migraine, epilepsy</li></ul>
+                </li>
+                <li>If response inadequate, move to 2nd line agents</li>
+                <li>If carbetocin contraindicated: oxytocin 3–5 U bolus then 40-in-40 infusion @ 10 ml/hr</li>
+                <li>TXA 1 g IV for all patients</li>
+              </ul>
+            </li>
+            <li><strong>Emergency:</strong>
+              <ul>
+                <li>As per Elective uterotonics</li>
+                <li>Early movement to 2nd line agents as required</li>
+              </ul>
+            </li>
+            <li><strong>2nd line agents:</strong>
+              <ul>
+                <li>Ergometrine 500 mcg IM
+                  <ul>
+                    <li>Avoid in PET, hypertension</li>
+                    <li>Ensure antiemetics given</li>
+                  </ul>
+                </li>
+                <li>Carboprost 250 mcg IM
+                  <ul>
+                    <li>Avoid in asthma</li>
+                    <li>Can repeat every 15 mins, up to max 8 doses</li>
+                  </ul>
+                </li>
+              </ul>
+            </li>
+          </ul>
+        </details>
+
+      </div>
+    </details>
+
+  </div><!-- /lscs -->
+
+  <!-- ── Other procedures ── -->
+  <button class="nav-button procedures" data-target="procedures">
+    <span>Other Obstetric Procedures</span><span class="chevron"></span>
+  </button>
+  <div id="procedures" class="section">
+
+    <details>
+      <summary>Trial of Forceps</summary>
+      <ul>
+        <li>Anaesthetic as for LSCS as potential for conversion to LSCS</li>
+        <li>Regional anaesthetic block to T4</li>
+        <li>No routine prophylactic antibiotics</li>
+      </ul>
+    </details>
+
+    <details>
+      <summary>Manual Removal of Placenta</summary>
+      <ul>
+        <li>Assess CVS stability:
+          <ul>
+            <li>If unstable: general anaesthesia</li>
+            <li>If stable: neuraxial anaesthesia aiming for block to T6
+              <ul>
+                <li>Spinal: 2 ml 0.5% heavy bupivacaine ± fentanyl 10–15 mcg</li>
+                <li>Epidural top-up: bupivacaine, ropivacaine or lidocaine as per LSCS top-up — 10–15 ml</li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </details>
+
+    <details>
+      <summary>Perineal Tear Repair</summary>
+      <ul>
+        <li>Sacral block required
+          <ul>
+            <li>Spinal: 1.5–2 ml heavy bupivacaine ± fentanyl 10–15 mcg</li>
+            <li>Epidural top-up 10–15 ml</li>
+          </ul>
+        </li>
+        <li>Remain sitting ~3 minutes to enhance sacral block</li>
+      </ul>
+    </details>
+
+    <details>
+      <summary>Cervical Suture Insertion / Removal</summary>
+      <ul>
+        <li>Block T10–S4 required</li>
+        <li>Spinal:
+          <ul>
+            <li>2 ml heavy bupivacaine 0.5%</li>
+            <li>OR 2 ml hyperbaric prilocaine 2%</li>
+            <li>± fentanyl 10–15 mcg</li>
+          </ul>
+        </li>
+      </ul>
+    </details>
+
+  </div><!-- /procedures -->
+
+  <!-- ── Labour analgesia ── -->
+  <button class="nav-button labour" data-target="labour">
+    <span>Labour Analgesia</span><span class="chevron"></span>
+  </button>
+  <div id="labour" class="section">
+
+    <details class="has-nested">
+      <summary>Epidural</summary>
+      <div class="nested-details">
+
+        <details class="nested">
+          <summary>Contraindications</summary>
+          <ul>
+            <li>Maternal refusal</li>
+            <li>Clotting abnormalities or thrombocytopenia
+              <ul>
+                <li>PLT 75–100 ×10⁹/L — proceed if clotting studies normal</li>
+                <li>PLT 50–75 ×10⁹/L — consider if benefits outweigh risk; most experienced operator</li>
+                <li>PLT &lt;50 ×10⁹/L — epidural contraindicated</li>
+              </ul>
+            </li>
+            <li>Local infection at site of insertion</li>
+            <li>Allergy to amide LA</li>
+            <li>Lack of midwifery staff for 1:1 care</li>
+          </ul>
+        </details>
+
+        <details class="nested">
+          <summary>Procedure</summary>
+          <ul>
+            <li>L2/3, L3/4, L4/5</li>
+            <li>16G Tuohy, LOR to saline</li>
+            <li>Leave 5 cm of catheter in the epidural space</li>
+            <li>Routine post-insertion checks (meniscal drop, aspiration)</li>
+            <li>Secure with Lockit, Tegaderm and Mefix dressing</li>
+            <li>Test dose 5 ml + 10 ml loading of low-dose bag mixture (0.1% L-bupivacaine + 2 mcg/ml fentanyl)</li>
+            <li>Maintenance infusion via Bodyguard pump
+              <ul>
+                <li>Code 611</li>
+                <li>PCEA with 8 ml (UHL) or 10 ml (QEH) bolus, 20 min lockout (max 120 ml / 4 hours)</li>
+              </ul>
+            </li>
+          </ul>
+        </details>
+
+      </div>
+    </details>
+
+    <details class="has-nested">
+      <summary>Epidural Troubleshooting</summary>
+      <div class="nested-details">
+
+        <details class="nested">
+          <summary>No block or low block</summary>
+          <ul>
+            <li>10–20 ml low-dose mix (bag solution) via epidural, re-check in 20 mins</li>
+            <li>If no improvement, resite</li>
+          </ul>
+        </details>
+
+        <details class="nested">
+          <summary>Missed segment</summary>
+          <ul>
+            <li>Truly a segment? vs unilateral block?</li>
+            <li>If confirmed, give 7–10 ml 0.25% bupivacaine + fentanyl 50 mcg</li>
+            <li>Position mother sore side down</li>
+            <li>If no improvement after 20 mins, resite</li>
+          </ul>
+        </details>
+
+        <details class="nested">
+          <summary>Poor sacral coverage</summary>
+          <ul>
+            <li>Suspect if describing groin, vaginal, rectal or perineal pain</li>
+            <li>Check S1/2 coverage with spray on lateral aspect of feet</li>
+            <li>Give 10–20 ml bag solution with mother sitting upright</li>
+            <li>Recheck after 20 mins; if not improved consider resite (ideally at lower interspace)</li>
+          </ul>
+        </details>
+
+        <details class="nested">
+          <summary>Unilateral block</summary>
+          <ul>
+            <li>Check if feet are warm and dry bilaterally</li>
+            <li>Lateral position sore side down, administer bolus from pump</li>
+            <li>If no improvement, pull catheter back by 1–2 cm and give another bolus</li>
+            <li>If still no improvement, give 7–10 ml 0.25% bupivacaine + 50 mcg fentanyl sore side down</li>
+            <li>Recheck block after 20 mins; if not improved consider resite</li>
+          </ul>
+        </details>
+
+        <details class="nested">
+          <summary>Lower back pain / rectal pressure</summary>
+          <ul>
+            <li>More likely in late stages of labour (8–10 cm dilation)</li>
+            <li>Particularly common with OP head position</li>
+            <li>Ensure block is working correctly (cold above T10, good sacral coverage)</li>
+            <li>Warn mother that complete relief may not be achievable</li>
+            <li>Give 7–10 ml 0.25% bupivacaine + 50 mcg fentanyl; sit mother upright and assess after 20 mins</li>
+          </ul>
+        </details>
+
+      </div>
+    </details>
+
+    <details>
+      <summary>Remifentanil PCA</summary>
+      <ul>
+        <li>Consider if neuraxial analgesia contraindicated or declined</li>
+        <li>Remifentanil PCA under local protocol</li>
+        <li>Requires 1:1 midwifery care and continuous monitoring</li>
+      </ul>
+    </details>
+
+  </div><!-- /labour -->
+
+  <!-- ── Emergencies ── -->
+  <button class="nav-button emergencies" data-target="emergencies">
+    <span>Emergencies</span><span class="chevron"></span>
+  </button>
+  <div id="emergencies" class="section">
+
+    <div class="qrh-card">
+      <div class="qrh-icon" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z" fill="currentColor"/>
+        </svg>
+      </div>
+      <div class="qrh-body">
+        <p class="qrh-title">OAA Quick Reference Handbook</p>
+        <p class="qrh-desc">Emergency guidance for obstetric anaesthesia — including PPH, eclampsia, high/total spinal, failed intubation, and more.</p>
+        <button class="qrh-btn" id="oaaQrhBtn">
+          <span class="qrh-btn-arrow">↗</span> Open OAA QRH
+        </button>
+      </div>
+    </div>
+
+  </div><!-- /emergencies -->
+
+  <!-- ── Contacts ── -->
+  <button class="nav-button contacts" data-target="contacts">
+    <span>Key Contacts</span><span class="chevron"></span>
+  </button>
+  <div id="contacts" class="section">
+
+    <details>
+      <summary>UHL</summary>
+      <ul>
+        <li>Obstetric Anaesthesia SpR — #5014</li>
+        <li>Obstetric Anaesthesia Consultant — #5119 (8–5 Mon–Fri)</li>
+        <li>Obstetric Anaesthesia ODP — #5616</li>
+        <li>General Anaesthesia SpR — #5000</li>
+      </ul>
+    </details>
+
+    <details>
+      <summary>QEH</summary>
+      <ul>
+        <li>Obstetric Anaesthesia SpR — #6611</li>
+        <li>Obstetric Anaesthesia Consultant — #6612 (8–5 Mon–Fri)</li>
+        <li>Obstetric Anaesthesia ODP — #6888</li>
+        <li>General Anaesthesia SpR — #6316</li>
+      </ul>
+    </details>
+
+  </div><!-- /contacts -->
+
+  <div class="footer">
+    Version 2026-02-07 · Based on LGT Obstetric Anaesthesia Guidelines 10th Ed.
+  </div>
+</div><!-- /container -->
+
+<!-- ═══════════════ PDF OVERLAY ═══════════════ -->
+<div id="pdfOverlay">
+  <div class="pdf-toolbar">
+    <button class="pdf-back-btn" id="pdfBackBtn">
+      <span class="pdf-back-arrow"></span> Back
+    </button>
+    <span class="pdf-title">LGT Obstetric Anaesthesia Guidelines</span>
+  </div>
+  <iframe id="pdfFrame" title="LGT Obstetric Anaesthesia Guidelines PDF"></iframe>
 </div>
 
-<!-- OTHER PROCEDURES -->
-<button class="nav-button procedures" data-target="procedures">
-  <span>Other Obstetric Procedures</span><span class="chevron"></span>
-</button>
-<div id="procedures" class="section">
-
-<details>
-<summary>Trial of Forceps</summary>
-<ul>
-<li>Anaesthetic as for LSCS as potential for conversion to LSCS</li>
-<li>Regional anaesthestic block to T4</li>
-<li>No routine prophylactic antibiotics</li>
-</ul>
-</details>
-
-<details>
-<summary>Manual Removal of Placenta</summary>
-<ul>
-<li>Assess CVS stability:</li>
-<ul>
-  <li>If unstable, for general anaesthesia</li>
-  <li>If stable, neuraxial anaesthesia aiming for block to T6</li>
-  <ul>
-    <li>Spinal: 2 ml 0.5% heavy bupivacaine ± fentanyl 10-15mcg</li>
-    <li>Epidural top-up: Bupivacaine, Ropivacaine or lidocaine as per LSCS top-up - 10-15ml</li>
-  </ul>
-</ul>
-</details>
-
-<details>
-<summary>Perineal Tear Repair</summary>
-<ul>
-<li>Sacral block required</li>
-  <ul>
-  <li>Spinal 1.5–2 ml heavy bupivacaine +/- fentanyl 10-15mcg</li>
-  <li>Epidural top-up 10-15ml</li>
-  </ul>
-<li>Remain sitting ~3 minutes to enhance sacral block</li>
-</ul>
-</details>
-
-<details>
-<summary>Cervical suture insertion/removal</summary>
-<ul>
-<li>Block T10-S4 required</li>
-<li>Spinal:</li>
-    <ul>
-      <li>2 ml heavy bupivacaine 0.5%</li>
-      <li>OR 2ml hyperbaric prilocaine 2%</li>
-      <li>+/- fentanyl 10-15mcg</li>
-</ul>
-</details>
-  
-</div>
-  
-<!-- LABOUR ANALGESIA -->
-<button class="nav-button labour" data-target="labour">
-  <span>Labour Analgesia</span><span class="chevron"></span>
-</button>
-<div id="labour" class="section">
-
-<details>
-<summary>Epidural</summary>
-<ul>
-<li><strong>Contraindications</strong></li>
-<ul>
-  <li>Maternal refusal</li>
-  <li>Clotting abnormalities or thrombocytopenia</li>
-  <ul>
-    <li>PLT 75-100x10^9 - proceed if clotting studies normal</li>
-    <li>PLT 50-75x10^9 - consider proceeding if benefits outweight risk - most experienced operator</li>
-    <li>PLT <50x10^9 - epidural contraindicated </li>
-  </ul>
-  <li>Local infection at site of insertion</li>
-  <li>Allergy to amide LA</li>
-  <li>Lack of Midwifery staff for 1:1 care</li>
-</ul>
-<li><strong>Procedure</strong></li>
-<ul>
-<li>L2/3, L3/4, L4/5</li>
-<li>16G Tuohy, LOR to saline</li>
-<li>Leave 5cm of catheter in the epidural space</li>
-<li>Routine post-insertion checks (meniscal drop, aspiration)</li>
-<li>Secure with Lockit, tegaderm and Mefix dressing</li>
-<li>Test dose 5ml + 10ml loading of low-dose bag mixture (0.1% L-bupivacaine + 2mcg/ml fentanyl)</li>
-<li>Maintenance infusion via Bodyguard pump</li>
-<ul>
-<li>Code 611</li>
-<li>PCEA with 8ml (UHL) or 10ml (QEH) bolus with 20min lockout (max 120ml / 4 hours)</li>
-</ul>
-</ul>
-</ul>
-</details>
-
-<details>
-<summary>Epidural troubleshooting</summary>
-<ul>
-<li><strong>No block or low block</strong></li>
-  <ul>
-  <li>10-20ml low-dose mix (bag solution) via epiudural, re-check in 20mins</li>
-  <li>If no improvement, resite</li>
-  </ul>
-<li><strong>Missed segment</strong></li>
-  <ul>
-  <li>Truly a segment? vs. unilateral block?</li>
-  <li>If confirmed segment, give 7-10ml 0.25% bupivacaine + fentanyl 50mcg</li>
-  <li>Position mother sore side down</li>
-  <li>If no improvement after 20mins, resite</li>
-  </ul>
-<li><strong>Poor sacral coverage</strong></li>
-  <ul>
-  <li>Suspect if describing groin, vaginal, rectal or perineal pain</li>
-  <li>Check for S1/2 coverage with spray on lateral aspect of feet</li>
-  <li>Give 10-20ml bag solution with mother sitting upright</li>
-  <li>Recheck after 20mins, if not improved then consider resite (ideally at lower interspace)</li>
-  </ul>
-<li><strong>Unilateral block</strong></li>
-  <ul>
-  <li>Check if feet are warm and dry bilaterally - if one sided, does this correspond to the pain?</li>
-  <li>Put patient in lateral position sore side down and administer bolus from pump</li>
-  <li>If no improvement, pull epidural catheter back by 1-2cm and give another bolus from pump</li>
-  <li>If still no improvement, give 7-10ml 0.25% bupivacaine + 50mcg fentanyl whilst sore side down</li>
-  <li>Recheck block after 20mins, if not improved then consider resite</li>
-  </ul>
-<li><strong>Lower back pain/'Rectal pressure'</strong></li>
-  <ul>
-  <li>More likely in late stages of labour (8-10cm dilation)</li>
-  <li>Particularly common with OP head position</li>
-  <li>Ensure block is working correctly using cold stick/spray (above T10 and good sacral coverage)</li>
-  <li>Warn mother that complete relief may not be achievable</li>
-  <li>Give 7-10ml 0.25% bupivacaine + 50mcg fentanyl, sit mother upright and assess response after 20mins</li>
-  </ul>
-</ul>
-</details>
-  
-<details>
-<summary>PCA</summary>
-<ul>
-<li>Consider if neuraxial analgesia contraindicated or declined</li>
-<li>Remifentanil PCA under local protocol</li>
-<li>Requires 1:1 midwifery care and continuous monitoring</li>
-</ul>
-</details>
-
-</div>
-
-<!-- EMERGENCIES -->
-<button class="nav-button emergencies" data-target="emergencies">
-  <span>Emergencies</span><span class="chevron"></span>
-</button>
-<div id="emergencies" class="section">
-
-<details>
-<summary>Post-Partum Haemorrhage</summary>
-<ul>
-<li>High-flow O₂</li>
-<li>2 large-bore IV cannulae</li>
-<li>TXA 1g IV early</li>
-<li>Activate major haemorrhage protocol</li>
-</ul>
-</details>
-
-<details>
-<summary>Eclampsia</summary>
-<ul>
-<li>Airway protection</li>
-<li>Magnesium sulphate loading + infusion</li>
-<li>Control severe hypertension</li>
-</ul>
-</details>
-
-<details>
-<summary>High Spinal / Total Spinal</summary>
-<ul>
-<li>Immediate airway support</li>
-<li>Left lateral tilt</li>
-<li>Vasopressors and ventilation</li>
-</ul>
-</details>
-
-</div>
-
-<!-- KEY CONTACTS -->
-<button class="nav-button contacts" data-target="contacts">
-  <span>Key Contacts</span><span class="chevron"></span>
-</button>
-<div id="contacts" class="section">
-
-<details>
-<summary>UHL</summary>
-<ul>
-<li>Obstretic Anaesthesia SpR - #5014</li>
-<li>Obstetric Anaesthesia Consultant - #5119 (8-5 M-F)</li>
-<li>Obstetric Anaesthesia ODP - #5616</li>
-<li>General Anaesthesia SpR - #5000</li>
-</ul>
-</details>
-
-<details>
-<summary>QEH</summary>
-<ul>
-<li>Obstretic Anaesthesia SpR - #6611</li>
-<li>Obstetric Anaesthesia Consultant - #6612(8-5 M-F)</li>
-<li>Obstetric Anaesthesia ODP - #6888</li>
-<li>General Anaesthesia SpR - #6316</li>
-</ul>
-</details>
-  
-</div>
-
-<div class="footer">
-Version 2026-02-07 · Based on LGT Obstetric Anaesthesia Guidelines 10th Ed.
-</div>
-
-<!-- INFO MODAL -->
+<!-- ═══════════════ INFO MODAL ═══════════════ -->
 <div class="modal" id="infoModal" aria-hidden="true">
   <div class="modal-content">
     <h2>About this guide</h2>
-
     <p>
       This application is a quick-reference summary based on the
       <strong>LGT Obstetric Anaesthesia Guidelines</strong>.
       It is intended for use by trained clinicians and does not replace
       clinical judgement or formal guidelines.
     </p>
-
     <p>
-      <a href="LGT_Obstetric_Anaesthesia_SOP.pdf" target="_blank" rel="noopener">
-        View full LGT Obstetric Anaesthesia Guidelines (PDF)
-      </a>
+      <a href="#" id="pdfLink">View full LGT Obstetric Anaesthesia Guidelines (PDF)</a>
     </p>
-
-    <p style="font-size:0.85rem;color:#555;">
-  To return, swipe from the left edge of the screen or use the browser back button.
-    </p>
-
-
     <p>
       Version 2026-02-07<br>
       For local guidance only.
     </p>
-
-    <button class="modal-close">Close</button>
+    <button class="modal-close" id="modalClose">Close</button>
   </div>
 </div>
 
+<!-- ═══════════════ JAVASCRIPT ═══════════════ -->
 <script>
 (function () {
-  const buttons = document.querySelectorAll(".nav-button");
+  'use strict';
+
+  /* ── Section index ── */
+  const SECTION_LABELS = {
+    lscs:        'Caesarean delivery',
+    procedures:  'Other Procedures',
+    labour:      'Labour Analgesia',
+    emergencies: 'Emergencies',
+    contacts:    'Key Contacts'
+  };
+
+  /* ════════════════════════════════════════
+     1. ACCORDION — open/close, one at a time
+  ════════════════════════════════════════ */
+  const navButtons = document.querySelectorAll('.nav-button');
 
   function closeAll() {
-    document.querySelectorAll(".section").forEach(s => s.classList.remove("open"));
-    buttons.forEach(b => b.classList.remove("open"));
-    localStorage.removeItem("openSection");
+    document.querySelectorAll('.section').forEach(s => s.classList.remove('open'));
+    navButtons.forEach(b => b.classList.remove('open'));
   }
 
-  buttons.forEach(button => {
-    button.addEventListener("click", () => {
-      const section = button.nextElementSibling;
-      if (!section || !section.classList.contains("section")) return;
+  navButtons.forEach(button => {
+    button.addEventListener('click', () => {
+      const sectionId = button.dataset.target;
+      const section   = document.getElementById(sectionId);
+      if (!section) return;
 
-      const isOpen = section.classList.contains("open");
+      const isOpen = section.classList.contains('open');
       closeAll();
 
       if (!isOpen) {
-        section.classList.add("open");
-        button.classList.add("open");
-        localStorage.setItem("openSection", button.dataset.target);
-        button.scrollIntoView({ behavior: "smooth", block: "start" });
+        section.classList.add('open');
+        button.classList.add('open');
+        localStorage.setItem('openSection', sectionId);
+        button.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      } else {
+        localStorage.removeItem('openSection');
       }
     });
   });
 
-  const last = localStorage.getItem("openSection");
-  if (last) {
-    const btn = document.querySelector(`.nav-button[data-target="${last}"]`);
+  /* Restore last open section on load */
+  const lastOpen = localStorage.getItem('openSection');
+  if (lastOpen) {
+    const btn = document.querySelector(`.nav-button[data-target="${lastOpen}"]`);
     if (btn) btn.click();
   }
 
-  // INFO MODAL LOGIC
-  const infoButton = document.querySelector(".info-button");
-  const infoModal = document.getElementById("infoModal");
-  const closeModal = document.querySelector(".modal-close");
+  /* ════════════════════════════════════════
+     1b. SUBSECTIONS — one open at a time
+         Intercept the native <details> toggle
+         so only one sibling is open per section.
+         Also handles nested details inside .has-nested.
+  ════════════════════════════════════════ */
+  document.querySelectorAll('.section').forEach(section => {
+    section.addEventListener('click', e => {
+      const clicked = e.target.closest('details');
+      if (!clicked) return;
 
-  infoButton.addEventListener("click", () => {
-    infoModal.classList.add("open");
-    infoModal.setAttribute("aria-hidden", "false");
+      const summary = e.target.closest('summary');
+      if (!summary) return;
+
+      // Nested details: close siblings within .nested-details
+      if (clicked.classList.contains('nested')) {
+        if (!clicked.hasAttribute('open')) {
+          clicked.closest('.nested-details').querySelectorAll('details.nested[open]').forEach(other => {
+            if (other !== clicked) other.removeAttribute('open');
+          });
+        }
+        return; // don't run top-level logic for nested clicks
+      }
+
+      // Top-level details: close siblings within the section
+      if (!clicked.hasAttribute('open')) {
+        section.querySelectorAll(':scope > details[open]').forEach(other => {
+          if (other !== clicked) other.removeAttribute('open');
+        });
+      }
+    });
   });
 
-  closeModal.addEventListener("click", () => {
-    infoModal.classList.remove("open");
-    infoModal.setAttribute("aria-hidden", "true");
+  /* ════════════════════════════════════════
+     2. SEARCH
+  ════════════════════════════════════════ */
+  const searchInput   = document.getElementById('searchInput');
+  const searchClear   = document.getElementById('searchClear');
+  const resultsBox    = document.getElementById('searchResults');
+
+  /* Build a flat index of all <details> elements */
+  function buildIndex() {
+    const index = [];
+    document.querySelectorAll('.section').forEach(section => {
+      const sectionId = section.id;
+      section.querySelectorAll('details').forEach(det => {
+        const summary = det.querySelector('summary');
+        const title   = summary ? summary.textContent.trim() : '';
+        const text    = det.textContent.trim();
+        index.push({ sectionId, title, text, element: det });
+      });
+    });
+    return index;
+  }
+
+  const searchIndex = buildIndex();
+
+  function escapeRe(str) {
+    return str.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+  }
+
+  function highlight(text, term) {
+    const re = new RegExp(`(${escapeRe(term)})`, 'gi');
+    return text.replace(re, '<mark>$1</mark>');
+  }
+
+  /* Extract a short snippet around the first match */
+  function snippet(text, term) {
+    const clean = text.replace(/\s+/g, ' ');
+    const re    = new RegExp(escapeRe(term), 'i');
+    const idx   = clean.search(re);
+    if (idx === -1) return '';
+    const start = Math.max(0, idx - 40);
+    const end   = Math.min(clean.length, idx + 80);
+    let s = (start > 0 ? '…' : '') + clean.slice(start, end) + (end < clean.length ? '…' : '');
+    return highlight(s, term);
+  }
+
+  function runSearch(term) {
+    term = term.trim();
+    if (term.length < 2) {
+      closeResults();
+      return;
+    }
+    const re = new RegExp(escapeRe(term), 'i');
+    const hits = searchIndex.filter(item => re.test(item.text));
+
+    if (hits.length === 0) {
+      resultsBox.innerHTML = '<div class="no-results">No results found.</div>';
+      resultsBox.classList.add('visible');
+      return;
+    }
+
+    resultsBox.innerHTML = hits.map((hit, i) => `
+      <div class="result-item"
+           role="option"
+           tabindex="0"
+           data-index="${i}"
+           data-section="${hit.sectionId}">
+        <div class="result-section">${SECTION_LABELS[hit.sectionId] || hit.sectionId}</div>
+        <div class="result-title">${highlight(hit.title, term)}</div>
+        <div class="result-snippet">${snippet(hit.text, term)}</div>
+      </div>
+    `).join('');
+
+    resultsBox.classList.add('visible');
+
+    /* Store hits array so click handler can reference them */
+    resultsBox._hits = hits;
+  }
+
+  function closeResults() {
+    resultsBox.classList.remove('visible');
+    resultsBox.innerHTML = '';
+  }
+
+  /* Click / keyboard on result item */
+  resultsBox.addEventListener('click', e => {
+    const item = e.target.closest('.result-item');
+    if (!item) return;
+    activateResult(item);
   });
 
-  infoModal.addEventListener("click", e => {
-    if (e.target === infoModal) {
-      infoModal.classList.remove("open");
-      infoModal.setAttribute("aria-hidden", "true");
+  resultsBox.addEventListener('keydown', e => {
+    if (e.key === 'Enter' || e.key === ' ') {
+      const item = e.target.closest('.result-item');
+      if (item) { e.preventDefault(); activateResult(item); }
+    }
+    if (e.key === 'ArrowDown') {
+      e.preventDefault();
+      const next = document.activeElement.nextElementSibling;
+      if (next) next.focus();
+    }
+    if (e.key === 'ArrowUp') {
+      e.preventDefault();
+      const prev = document.activeElement.previousElementSibling;
+      if (prev) prev.focus(); else searchInput.focus();
+    }
+    if (e.key === 'Escape') {
+      closeResults();
+      searchInput.focus();
     }
   });
 
-  if ("serviceWorker" in navigator) {
-    navigator.serviceWorker.register("service-worker.js");
+  searchInput.addEventListener('keydown', e => {
+    if (e.key === 'ArrowDown') {
+      e.preventDefault();
+      const first = resultsBox.querySelector('.result-item');
+      if (first) first.focus();
+    }
+    if (e.key === 'Escape') closeResults();
+  });
+
+  function activateResult(item) {
+    const sectionId = item.dataset.section;
+    const idx       = parseInt(item.dataset.index, 10);
+    const hit       = resultsBox._hits[idx];
+
+    /* Clear search */
+    searchInput.value = '';
+    searchClear.style.display = 'none';
+    closeResults();
+
+    /* Open the parent section */
+    const section = document.getElementById(sectionId);
+    const btn     = document.querySelector(`.nav-button[data-target="${sectionId}"]`);
+    if (!section || !btn) return;
+
+    if (!section.classList.contains('open')) {
+      closeAll();
+      section.classList.add('open');
+      btn.classList.add('open');
+    }
+
+    /* Open and highlight the details element */
+    const det = hit.element;
+    det.setAttribute('open', '');
+    det.classList.add('search-highlight');
+    setTimeout(() => det.classList.remove('search-highlight'), 2600);
+
+    /* Scroll to it */
+    setTimeout(() => {
+      det.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }, 80);
   }
+
+  searchInput.addEventListener('input', () => {
+    const val = searchInput.value;
+    searchClear.style.display = val ? 'block' : 'none';
+    runSearch(val);
+  });
+
+  searchClear.addEventListener('click', () => {
+    searchInput.value = '';
+    searchClear.style.display = 'none';
+    closeResults();
+    searchInput.focus();
+  });
+
+  /* Close results when clicking outside */
+  document.addEventListener('click', e => {
+    if (!e.target.closest('.search-inner')) closeResults();
+  });
+
+  /* ════════════════════════════════════════
+     3. PDF OVERLAY (replaces window.open)
+  ════════════════════════════════════════ */
+  const pdfOverlay = document.getElementById('pdfOverlay');
+  const pdfFrame   = document.getElementById('pdfFrame');
+  const pdfBackBtn = document.getElementById('pdfBackBtn');
+  const pdfLink    = document.getElementById('pdfLink');
+
+  function openPdf(url) {
+    pdfFrame.src = url;
+    pdfOverlay.classList.add('open');
+    pdfOverlay.style.display = 'flex';
+    history.pushState({ pdfOpen: true }, '', '');
+  }
+
+  function closePdf() {
+    pdfOverlay.classList.remove('open');
+    pdfOverlay.style.display = 'none';
+    pdfFrame.src = '';
+    document.querySelector('.pdf-title').textContent = 'LGT Obstetric Anaesthesia Guidelines';
+  }
+
+  pdfLink.addEventListener('click', e => {
+    e.preventDefault();
+    /* Close modal first */
+    document.getElementById('infoModal').classList.remove('open');
+    document.getElementById('infoModal').setAttribute('aria-hidden', 'true');
+    openPdf('LGT_Obstetric_Anaesthesia_SOP.pdf');
+  });
+
+  /* OAA QRH button — opens external PDF in overlay */
+  const oaaQrhBtn = document.getElementById('oaaQrhBtn');
+  if (oaaQrhBtn) {
+    oaaQrhBtn.addEventListener('click', () => {
+      /* Update toolbar title for context */
+      document.querySelector('.pdf-title').textContent = 'OAA Quick Reference Handbook';
+      openPdf('https://www.oaa-anaes.ac.uk/assets/managed/editor/File/QRH/OAA_QRH_2023.pdf');
+    });
+  }
+
+  pdfBackBtn.addEventListener('click', closePdf);
+
+  /* Handle browser back button when PDF is open */
+  window.addEventListener('popstate', e => {
+    if (pdfOverlay.classList.contains('open')) {
+      closePdf();
+    }
+  });
+
+  /* ════════════════════════════════════════
+     4. INFO MODAL
+  ════════════════════════════════════════ */
+  const infoButton = document.querySelector('.info-button');
+  const infoModal  = document.getElementById('infoModal');
+  const modalClose = document.getElementById('modalClose');
+
+  infoButton.addEventListener('click', () => {
+    infoModal.classList.add('open');
+    infoModal.setAttribute('aria-hidden', 'false');
+  });
+
+  modalClose.addEventListener('click', () => {
+    infoModal.classList.remove('open');
+    infoModal.setAttribute('aria-hidden', 'true');
+  });
+
+  infoModal.addEventListener('click', e => {
+    if (e.target === infoModal) {
+      infoModal.classList.remove('open');
+      infoModal.setAttribute('aria-hidden', 'true');
+    }
+  });
+
+  /* ════════════════════════════════════════
+     5. SERVICE WORKER
+  ════════════════════════════════════════ */
+  if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.register('service-worker.js');
+  }
+
 })();
 </script>
 
