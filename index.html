@@ -805,9 +805,9 @@ details.nested ul {
             <li>Maternal refusal</li>
             <li>Clotting abnormalities or thrombocytopenia
               <ul>
-                <li>Platelets 75–100 ×10⁹/L — proceed if clotting studies normal</li>
-                <li>Platelets 50–75 ×10⁹/L — consider if benefits outweigh risk; most experienced operator</li>
-                <li>Platelets &lt;50 ×10⁹/L — epidural contraindicated</li>
+                <li>PLT 75–100 ×10⁹/L — proceed if clotting studies normal</li>
+                <li>PLT 50–75 ×10⁹/L — consider if benefits outweigh risk; most experienced operator</li>
+                <li>PLT &lt;50 ×10⁹/L — epidural contraindicated</li>
               </ul>
             </li>
             <li>Local infection at site of insertion</li>
@@ -969,7 +969,7 @@ details.nested ul {
     </button>
     <span class="pdf-title">LGT Obstetric Anaesthesia Guidelines</span>
   </div>
-  <iframe id="pdfFrame" title="LGT Obstetric Anaesthesia Guidelines PDF"></iframe>
+  <iframe id="pdfFrame" title="PDF viewer"></iframe>
 </div>
 
 <!-- ═══════════════ INFO MODAL ═══════════════ -->
@@ -1249,14 +1249,30 @@ details.nested ul {
   });
 
   /* ════════════════════════════════════════
-     3. PDF OVERLAY (replaces window.open)
+     3. PDF VIEWER — iOS-aware
+        iOS Safari cannot scroll PDFs inside
+        iframes. On iOS we hand off to the
+        native viewer via window.open().
+        On desktop we use the in-app overlay.
   ════════════════════════════════════════ */
   const pdfOverlay = document.getElementById('pdfOverlay');
   const pdfFrame   = document.getElementById('pdfFrame');
   const pdfBackBtn = document.getElementById('pdfBackBtn');
   const pdfLink    = document.getElementById('pdfLink');
 
-  function openPdf(url) {
+  /* Detect iOS (iPhone, iPad — including iPad on iOS 13+ which
+     reports as MacIntel but has touch) */
+  const isIOS = /iP(hone|od|ad)/.test(navigator.platform) ||
+    (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
+
+  function openPdf(url, title) {
+    if (isIOS) {
+      /* Hand off to Safari's native PDF viewer — fully scrollable */
+      window.open(url, '_blank');
+      return;
+    }
+    /* Desktop: use in-app iframe overlay */
+    document.querySelector('.pdf-title').textContent = title || 'PDF';
     pdfFrame.src = url;
     pdfOverlay.classList.add('open');
     pdfOverlay.style.display = 'flex';
@@ -1272,19 +1288,16 @@ details.nested ul {
 
   pdfLink.addEventListener('click', e => {
     e.preventDefault();
-    /* Close modal first */
     document.getElementById('infoModal').classList.remove('open');
     document.getElementById('infoModal').setAttribute('aria-hidden', 'true');
-    openPdf('LGT_Obstetric_Anaesthesia_SOP.pdf');
+    openPdf('LGT_Obstetric_Anaesthesia_SOP.pdf', 'LGT Obstetric Anaesthesia Guidelines');
   });
 
-  /* OAA QRH button — opens external PDF in overlay */
+  /* OAA QRH button */
   const oaaQrhBtn = document.getElementById('oaaQrhBtn');
   if (oaaQrhBtn) {
     oaaQrhBtn.addEventListener('click', () => {
-      /* Update toolbar title for context */
-      document.querySelector('.pdf-title').textContent = 'OAA Quick Reference Handbook';
-      openPdf('https://www.oaa-anaes.ac.uk/downloads/oaa-qrh/june-2024-v1.2/final-obs-qrh-v.1.2.pdf');
+      openPdf('https://www.oaa-anaes.ac.uk/assets/managed/editor/File/QRH/OAA_QRH_2023.pdf', 'OAA Quick Reference Handbook');
     });
   }
 
