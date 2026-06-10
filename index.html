@@ -1189,7 +1189,7 @@ details.nested ul {
       </div>
       <div class="qrh-body">
         <p class="qrh-title">OAA Quick Reference Handbook</p>
-        <p class="qrh-desc">Emergency guidance for obstetric anaesthesia — including PPH, eclampsia, high/total spinal, failed intubation, and more.</p>
+        <p class="qrh-desc">Emergency guidance for obstetric anaesthesia — including PPH, eclampsia, high/total spinal and more.</p>
         <button class="qrh-btn" id="oaaQrhBtn">
           <span class="qrh-btn-arrow">↗</span> Open OAA QRH
         </button>
@@ -1707,22 +1707,37 @@ details.nested ul {
      TEXT SEARCH WITH CANVAS HIGHLIGHTS
   ══════════════════════════════════════ */
 
-  /* Map a PDF text item's bounding box onto canvas coordinates */
+  /* Map a PDF text item's bounding box onto canvas coordinates.
+     item.transform = [a, b, c, d, e, f]  (PDF CTM)
+       e, f = origin of the text run in PDF user space (bottom-left origin)
+       a, d = x/y scale (font size × CSS scale)
+     item.width, item.height = dimensions in PDF user units */
   function itemRect(item, viewport) {
-    /* item.transform = [scaleX, skewX, skewY, scaleY, tx, ty] in PDF space */
-    const [,,,, tx, ty] = item.transform;
-    /* item.height in PDF units; width from item.width */
-    const h = item.height || 10;
-    const w = item.width  || 0;
-    /* PDF y is from bottom; canvas y from top */
-    const pt1 = viewport.convertToViewportPoint(tx,     ty);
-    const pt2 = viewport.convertToViewportPoint(tx + w, ty - h);
-    return {
-      x:      Math.min(pt1[0], pt2[0]) - 1,
-      y:      Math.min(pt1[1], pt2[1]) - 1,
-      width:  Math.abs(pt2[0] - pt1[0]) + 2,
-      height: Math.abs(pt2[1] - pt1[1]) + 2
-    };
+    const [a, b, c, d, e, f] = item.transform;
+
+    /* Font height from the scale component of the matrix */
+    const fontH = Math.sqrt(b * b + d * d);
+    /* Width as reported by PDF.js in user units */
+    const w     = item.width;
+
+    /* Four corners of the text bounding box in PDF user space
+       PDF y=0 is at bottom, text baseline is at (e, f),
+       ascent goes UP by fontH */
+    const pts = [
+      [e,         f],
+      [e + w,     f],
+      [e + w,     f + fontH],
+      [e,         f + fontH]
+    ].map(([x, y]) => viewport.convertToViewportPoint(x, y));
+
+    const xs = pts.map(p => p[0]);
+    const ys = pts.map(p => p[1]);
+    const x0 = Math.min(...xs) - 1;
+    const y0 = Math.min(...ys) - 2;
+    const x1 = Math.max(...xs) + 1;
+    const y1 = Math.max(...ys) + 1;
+
+    return { x: x0, y: y0, width: x1 - x0, height: y1 - y0 };
   }
 
   /* Clear all highlight overlays */
