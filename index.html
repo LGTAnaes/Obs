@@ -1773,11 +1773,7 @@ details.nested ul {
   let pdfCurrentPage= 1;
   let pdfTotalPages = 0;
   let pdfScale      = 1.8;
-  /* pageData[i] = { canvas, ctx, viewport, items } for page i+1 */
   let pageData      = [];
-  /* allMatches = [{pageIdx (0-based), itemIdx, charStart, charEnd}] */
-  let allMatches    = [];
-  let matchCurrent  = -1;
 
   /* ── Load PDF.js lazily ── */
   function loadPdfJs(cb) {
