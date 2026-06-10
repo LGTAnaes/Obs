@@ -759,61 +759,68 @@ details.nested ul {
   </button>
   <div id="lscs" class="section">
 
-    <details>
-      <summary>Regional Anaesthesia – Spinal</summary>
-      <ul>
-        <li>14–16G IV access, warmed fluids running</li>
-        <li>2.0–2.5 ml 0.5% heavy bupivacaine + 300 mcg diamorphine
-          <ul><li>Alternative: 100 mcg PF morphine + 10–15 mcg fentanyl</li></ul>
-        </li>
-        <li>Phenylephrine infusion 50 mcg/ml started at 40 ml/hr</li>
-        <li>Aiming bilateral sensory block T4–S3</li>
-      </ul>
-    </details>
+    <details class="has-nested">
+      <summary>Regional Anaesthesia</summary>
+      <div class="nested-details">
 
-    <details>
-      <summary>Regional Anaesthesia – CSE</summary>
-      <ul>
-        <li>Consider for prolonged surgery or complex medical conditions</li>
-        <li>Reduce spinal dose in cardiac disease, short stature, obesity</li>
-        <li>Phenylephrine infusion 50 mcg/ml started at 40 ml/hr</li>
-        <li>Tegaderm dressing + Mefix strip</li>
-        <li>If initial spinal bolus does not achieve desired block height, use 5 ml bolus of epidural top-ups and re-assess</li>
-        <li>Consider 5–10 ml epidural top-up after 75–90 mins if surgery ongoing</li>
-      </ul>
-    </details>
-
-    <details>
-      <summary>Regional Anaesthesia – Epidural Top-Up</summary>
-      <ul>
-        <li>Only if functioning adequately. If not, remove and place spinal</li>
-        <li>Use 1 of the following:
+        <details class="nested">
+          <summary>Spinal</summary>
           <ul>
-            <li>0.5% bupivacaine</li>
-            <li>0.75% ropivacaine</li>
-            <li>2% lidocaine + adrenaline 1:200,000 (0.1 ml 1:1000 adrenaline drawn up to 20 ml with 2% lidocaine)</li>
+            <li>14–16G IV access, warmed fluids running</li>
+            <li>2.0–2.5 ml 0.5% heavy bupivacaine + 300 mcg diamorphine
+              <ul><li>Alternative: 100 mcg PF morphine + 10–15 mcg fentanyl</li></ul>
+            </li>
+            <li>Phenylephrine infusion 50 mcg/ml started at 40 ml/hr</li>
+            <li>Aiming bilateral sensory block T4–S3</li>
           </ul>
-        </li>
-        <li>Test dose of 3 ml, followed by 5 ml increments up to a total of 20 ml</li>
-        <li>Add fentanyl 50–100 mcg to initial bolus</li>
-        <li>Diamorphine 3 mg (or PF morphine 3 mg) at end</li>
-      </ul>
-    </details>
+        </details>
 
-    <details>
-      <summary>Intra-operative pain under regional anaesthesia</summary>
-      <ul>
-        <li>If patient has epidural, a further top-up can be given</li>
-        <li>If no epidural, offer GA and convert if patient accepts</li>
-        <li>If GA declined, rescue analgesia includes:
+        <details class="nested">
+          <summary>CSE</summary>
           <ul>
-            <li>Alfentanil 200 mcg increments, fentanyl 20 mcg increments</li>
-            <li>Ketamine 10–20 mg IV</li>
-            <li>Nitrous oxide in O₂ (50:50)</li>
+            <li>Consider for prolonged surgery or complex medical conditions</li>
+            <li>Reduce spinal dose in cardiac disease, short stature, obesity</li>
+            <li>Phenylephrine infusion 50 mcg/ml started at 40 ml/hr</li>
+            <li>Tegaderm dressing + Mefix strip</li>
+            <li>If initial spinal bolus does not achieve desired block height, use 5 ml bolus of epidural top-ups and re-assess</li>
+            <li>Consider 5–10 ml epidural top-up after 75–90 mins if surgery ongoing</li>
           </ul>
-        </li>
-        <li>Clearly document the events and discussions with patient</li>
-      </ul>
+        </details>
+
+        <details class="nested">
+          <summary>Epidural Top-Up</summary>
+          <ul>
+            <li>Only if functioning adequately. If not, remove and place spinal</li>
+            <li>Use 1 of the following:
+              <ul>
+                <li>0.5% bupivacaine</li>
+                <li>0.75% ropivacaine</li>
+                <li>2% lidocaine + adrenaline 1:200,000 (0.1 ml 1:1000 adrenaline drawn up to 20 ml with 2% lidocaine)</li>
+              </ul>
+            </li>
+            <li>Test dose of 3 ml, followed by 5 ml increments up to a total of 20 ml</li>
+            <li>Add fentanyl 50–100 mcg to initial bolus</li>
+            <li>Diamorphine 3 mg (or PF morphine 3 mg) at end</li>
+          </ul>
+        </details>
+
+        <details class="nested">
+          <summary>Intra-operative pain under regional anaesthesia</summary>
+          <ul>
+            <li>If patient has epidural, a further top-up can be given</li>
+            <li>If no epidural, offer GA and convert if patient accepts</li>
+            <li>If GA declined, rescue analgesia includes:
+              <ul>
+                <li>Alfentanil 200 mcg increments, fentanyl 20 mcg increments</li>
+                <li>Ketamine 10–20 mg IV</li>
+                <li>Nitrous oxide in O₂ (50:50)</li>
+              </ul>
+            </li>
+            <li>Clearly document the events and discussions with patient</li>
+          </ul>
+        </details>
+
+      </div>
     </details>
 
     <details class="has-nested">
@@ -1571,9 +1578,7 @@ details.nested ul {
   });
 
   /* ════════════════════════════════════════
-     3. PDF VIEWER — PDF.js (works on iOS)
-        Renders all pages as canvases.
-        Back button, page nav, text search.
+     3. PDF VIEWER — PDF.js with text highlights
   ════════════════════════════════════════ */
   const pdfOverlay    = document.getElementById('pdfOverlay');
   const pdfBackBtn    = document.getElementById('pdfBackBtn');
@@ -1589,75 +1594,104 @@ details.nested ul {
   const pdfSearchCount= document.getElementById('pdfSearchCount');
   const pdfLink       = document.getElementById('pdfLink');
 
-  /* PDF.js state */
   let pdfDoc        = null;
   let pdfCurrentPage= 1;
   let pdfTotalPages = 0;
-  let pdfRendering  = false;
-  let pdfScale      = 1.8;   /* good default for phone screens */
-  let searchMatches = [];    /* [{page, items}] */
-  let searchCurrent = -1;
+  let pdfScale      = 1.8;
+  /* pageData[i] = { canvas, ctx, viewport, items } for page i+1 */
+  let pageData      = [];
+  /* allMatches = [{pageIdx (0-based), itemIdx, charStart, charEnd}] */
+  let allMatches    = [];
+  let matchCurrent  = -1;
 
-  /* Load PDF.js from CDN */
+  /* ── Load PDF.js lazily ── */
   function loadPdfJs(cb) {
     if (window.pdfjsLib) { cb(); return; }
     const s = document.createElement('script');
     s.src = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js';
     s.onload = () => {
-      window.pdfjsLib.GlobalWorkerOptions.workerSrc =
+      pdfjsLib.GlobalWorkerOptions.workerSrc =
         'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
       cb();
     };
     document.head.appendChild(s);
   }
 
-  /* Render one page to a <canvas> and append to wrap */
-  async function renderPage(page) {
+  /* ── Render one page, store data, return wrapper div ── */
+  async function renderOnePage(pageNum) {
+    const page     = await pdfDoc.getPage(pageNum);
     const viewport = page.getViewport({ scale: pdfScale });
-    const canvas   = document.createElement('canvas');
+
+    /* Wrapper holds canvas + highlight overlay */
+    const wrap = document.createElement('div');
+    wrap.style.cssText = `position:relative;display:inline-block;line-height:0;`;
+    wrap.dataset.pageNum = pageNum;
+
+    /* Main canvas */
+    const canvas = document.createElement('canvas');
     canvas.className = 'pdf-page-canvas';
-    canvas.dataset.pageNum = page.pageNumber;
     canvas.width  = viewport.width;
     canvas.height = viewport.height;
-    pdfCanvasWrap.appendChild(canvas);
+    wrap.appendChild(canvas);
+
+    /* Highlight overlay canvas (drawn on top) */
+    const hl = document.createElement('canvas');
+    hl.width  = viewport.width;
+    hl.height = viewport.height;
+    hl.style.cssText = 'position:absolute;top:0;left:0;pointer-events:none;';
+    wrap.appendChild(hl);
+
+    pdfCanvasWrap.appendChild(wrap);
+
+    /* Render PDF content */
     await page.render({ canvasContext: canvas.getContext('2d'), viewport }).promise;
+
+    /* Get text content with transform info */
+    const content = await page.getTextContent();
+    const items   = content.items; /* each has .str, .transform, .width, .height */
+
+    pageData[pageNum - 1] = { canvas, hl, ctx: hl.getContext('2d'), viewport, items };
+    return wrap;
   }
 
-  /* Render all pages sequentially */
+  /* ── Render all pages ── */
   async function renderAllPages() {
     pdfCanvasWrap.innerHTML = '';
-    pdfLoadingMsg.textContent = 'Rendering pages…';
     pdfCanvasWrap.appendChild(pdfLoadingMsg);
+    pageData = [];
 
     for (let i = 1; i <= pdfTotalPages; i++) {
       pdfLoadingMsg.textContent = `Rendering page ${i} of ${pdfTotalPages}…`;
-      const page = await pdfDoc.getPage(i);
-      await renderPage(page);
-      pdfLoadingMsg.remove();
-      pdfCanvasWrap.appendChild(pdfLoadingMsg); /* keep at bottom during load */
+      await renderOnePage(i);
+      if (pdfLoadingMsg.parentNode === pdfCanvasWrap) pdfLoadingMsg.remove();
+      pdfCanvasWrap.appendChild(pdfLoadingMsg);
     }
-    pdfLoadingMsg.remove();
+    if (pdfLoadingMsg.parentNode === pdfCanvasWrap) pdfLoadingMsg.remove();
+
     pdfPageInfo.textContent = `${pdfTotalPages} pages`;
     pdfPrevBtn.disabled = false;
     pdfNextBtn.disabled = false;
   }
 
-  /* Scroll to a specific page canvas */
+  /* ── Scroll to page ── */
   function scrollToPage(n) {
-    const canvas = pdfCanvasWrap.querySelector(`[data-page-num="${n}"]`);
-    if (canvas) canvas.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    const wrap = pdfCanvasWrap.querySelector(`[data-page-num="${n}"]`);
+    if (wrap) {
+      const top = wrap.offsetTop - pdfCanvasWrap.offsetTop - 8;
+      pdfCanvasWrap.scrollTo({ top, behavior: 'smooth' });
+    }
     pdfCurrentPage = n;
     pdfPageInfo.textContent = `Page ${n} / ${pdfTotalPages}`;
   }
 
-  /* Update current page indicator based on scroll position */
+  /* Page indicator on scroll */
   pdfCanvasWrap.addEventListener('scroll', () => {
-    const canvases = pdfCanvasWrap.querySelectorAll('.pdf-page-canvas');
-    canvases.forEach(c => {
-      const rect = c.getBoundingClientRect();
-      const wrapRect = pdfCanvasWrap.getBoundingClientRect();
-      if (rect.top >= wrapRect.top - 20 && rect.top < wrapRect.top + wrapRect.height / 2) {
-        const n = parseInt(c.dataset.pageNum);
+    const wraps = pdfCanvasWrap.querySelectorAll('[data-page-num]');
+    const mid   = pdfCanvasWrap.getBoundingClientRect().top + pdfCanvasWrap.offsetHeight / 3;
+    wraps.forEach(w => {
+      const r = w.getBoundingClientRect();
+      if (r.top <= mid && r.bottom > mid) {
+        const n = parseInt(w.dataset.pageNum);
         if (n !== pdfCurrentPage) {
           pdfCurrentPage = n;
           pdfPageInfo.textContent = `Page ${n} / ${pdfTotalPages}`;
@@ -1666,86 +1700,108 @@ details.nested ul {
     });
   }, { passive: true });
 
-  pdfPrevBtn.addEventListener('click', () => {
-    if (pdfCurrentPage > 1) scrollToPage(pdfCurrentPage - 1);
-  });
-  pdfNextBtn.addEventListener('click', () => {
-    if (pdfCurrentPage < pdfTotalPages) scrollToPage(pdfCurrentPage + 1);
-  });
+  pdfPrevBtn.addEventListener('click', () => { if (pdfCurrentPage > 1) scrollToPage(pdfCurrentPage - 1); });
+  pdfNextBtn.addEventListener('click', () => { if (pdfCurrentPage < pdfTotalPages) scrollToPage(pdfCurrentPage + 1); });
 
-  /* ── TEXT SEARCH ── */
-  /* Build a text index: [{page, text}] */
-  async function buildTextIndex() {
-    const index = [];
-    for (let i = 1; i <= pdfTotalPages; i++) {
-      const page    = await pdfDoc.getPage(i);
-      const content = await page.getTextContent();
-      const text    = content.items.map(item => item.str).join(' ');
-      index.push({ page: i, text });
-    }
-    return index;
+  /* ══════════════════════════════════════
+     TEXT SEARCH WITH CANVAS HIGHLIGHTS
+  ══════════════════════════════════════ */
+
+  /* Map a PDF text item's bounding box onto canvas coordinates */
+  function itemRect(item, viewport) {
+    /* item.transform = [scaleX, skewX, skewY, scaleY, tx, ty] in PDF space */
+    const [,,,, tx, ty] = item.transform;
+    /* item.height in PDF units; width from item.width */
+    const h = item.height || 10;
+    const w = item.width  || 0;
+    /* PDF y is from bottom; canvas y from top */
+    const pt1 = viewport.convertToViewportPoint(tx,     ty);
+    const pt2 = viewport.convertToViewportPoint(tx + w, ty - h);
+    return {
+      x:      Math.min(pt1[0], pt2[0]) - 1,
+      y:      Math.min(pt1[1], pt2[1]) - 1,
+      width:  Math.abs(pt2[0] - pt1[0]) + 2,
+      height: Math.abs(pt2[1] - pt1[1]) + 2
+    };
   }
 
-  let textIndex = null;
+  /* Clear all highlight overlays */
+  function clearHighlights() {
+    pageData.forEach(pd => {
+      if (pd) pd.ctx.clearRect(0, 0, pd.hl.width, pd.hl.height);
+    });
+  }
 
-  async function runSearch(term) {
-    term = term.trim();
-    if (!term || term.length < 2) {
-      searchMatches = []; searchCurrent = -1;
-      pdfSearchCount.textContent = '';
-      pdfSearchPrev.disabled = true;
-      pdfSearchNext.disabled = true;
-      return;
-    }
-    if (!textIndex) {
-      pdfSearchCount.textContent = 'Indexing…';
-      textIndex = await buildTextIndex();
-    }
+  /* Draw highlight rectangles for all matches; active match is orange, others yellow */
+  function drawHighlights() {
+    clearHighlights();
+    allMatches.forEach((m, idx) => {
+      const pd = pageData[m.pageIdx];
+      if (!pd) return;
+      const item = pd.items[m.itemIdx];
+      if (!item) return;
+      const rect = itemRect(item, pd.viewport);
+      const isActive = idx === matchCurrent;
+      pd.ctx.fillStyle = isActive ? 'rgba(255,140,0,0.55)' : 'rgba(255,220,0,0.4)';
+      pd.ctx.fillRect(rect.x, rect.y, rect.width, rect.height);
+      if (isActive) {
+        pd.ctx.strokeStyle = 'rgba(200,80,0,0.8)';
+        pd.ctx.lineWidth = 1.5;
+        pd.ctx.strokeRect(rect.x, rect.y, rect.width, rect.height);
+      }
+    });
+  }
+
+  /* Build match list across all pages */
+  function findMatches(term) {
+    allMatches = [];
+    if (!term || term.length < 2) return;
     const re = new RegExp(term.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'), 'gi');
-    searchMatches = textIndex
-      .filter(entry => re.test(entry.text))
-      .map(entry => entry.page);
-    searchCurrent = searchMatches.length > 0 ? 0 : -1;
-    updateSearchUI();
-    if (searchMatches.length > 0) scrollToPage(searchMatches[0]);
+    pageData.forEach((pd, pageIdx) => {
+      if (!pd) return;
+      pd.items.forEach((item, itemIdx) => {
+        if (re.test(item.str)) {
+          allMatches.push({ pageIdx, itemIdx });
+          re.lastIndex = 0; /* reset after test() */
+        }
+      });
+    });
   }
 
   function updateSearchUI() {
-    if (searchMatches.length === 0) {
-      pdfSearchCount.textContent = 'No results';
+    if (allMatches.length === 0) {
+      pdfSearchCount.textContent = pdfSearchInput.value.trim().length >= 2 ? 'No results' : '';
       pdfSearchPrev.disabled = true;
       pdfSearchNext.disabled = true;
     } else {
-      pdfSearchCount.textContent = `${searchCurrent + 1} / ${searchMatches.length}`;
-      pdfSearchPrev.disabled = searchMatches.length < 2;
-      pdfSearchNext.disabled = searchMatches.length < 2;
+      pdfSearchCount.textContent = `${matchCurrent + 1} / ${allMatches.length}`;
+      pdfSearchPrev.disabled = allMatches.length < 2;
+      pdfSearchNext.disabled = allMatches.length < 2;
     }
   }
 
-  pdfSearchInput.addEventListener('input', () => runSearch(pdfSearchInput.value));
+  function runPdfSearch(term) {
+    term = term.trim();
+    findMatches(term);
+    matchCurrent = allMatches.length > 0 ? 0 : -1;
+    drawHighlights();
+    updateSearchUI();
+    if (allMatches.length > 0) scrollToPage(allMatches[0].pageIdx + 1);
+  }
+
+  function jumpToMatch(idx) {
+    matchCurrent = (idx + allMatches.length) % allMatches.length;
+    drawHighlights();
+    updateSearchUI();
+    scrollToPage(allMatches[matchCurrent].pageIdx + 1);
+  }
+
+  pdfSearchInput.addEventListener('input',   () => runPdfSearch(pdfSearchInput.value));
   pdfSearchInput.addEventListener('keydown', e => {
-    if (e.key === 'Enter') {
-      if (searchMatches.length > 0) {
-        searchCurrent = (searchCurrent + 1) % searchMatches.length;
-        updateSearchUI();
-        scrollToPage(searchMatches[searchCurrent]);
-      }
-    }
+    if (e.key === 'Enter' && allMatches.length > 0) jumpToMatch(matchCurrent + 1);
   });
-
-  pdfSearchNext.addEventListener('click', () => {
-    if (searchMatches.length === 0) return;
-    searchCurrent = (searchCurrent + 1) % searchMatches.length;
-    updateSearchUI();
-    scrollToPage(searchMatches[searchCurrent]);
-  });
-
-  pdfSearchPrev.addEventListener('click', () => {
-    if (searchMatches.length === 0) return;
-    searchCurrent = (searchCurrent - 1 + searchMatches.length) % searchMatches.length;
-    updateSearchUI();
-    scrollToPage(searchMatches[searchCurrent]);
-  });
+  pdfSearchNext.addEventListener('click', () => { if (allMatches.length) jumpToMatch(matchCurrent + 1); });
+  pdfSearchPrev.addEventListener('click', () => { if (allMatches.length) jumpToMatch(matchCurrent - 1); });
 
   /* ── OPEN / CLOSE ── */
   function openPdf(url, title) {
@@ -1754,9 +1810,9 @@ details.nested ul {
     pdfOverlay.style.display = 'flex';
     history.pushState({ pdfOpen: true }, '', '');
 
-    /* Reset state */
-    pdfDoc = null; pdfCurrentPage = 1; pdfTotalPages = 0;
-    textIndex = null; searchMatches = []; searchCurrent = -1;
+    /* Reset */
+    pdfDoc = null; pdfCurrentPage = 1; pdfTotalPages = 0; pageData = [];
+    allMatches = []; matchCurrent = -1;
     pdfSearchInput.value = ''; pdfSearchCount.textContent = '';
     pdfSearchPrev.disabled = true; pdfSearchNext.disabled = true;
     pdfPrevBtn.disabled = true; pdfNextBtn.disabled = true;
@@ -1767,7 +1823,7 @@ details.nested ul {
 
     loadPdfJs(async () => {
       try {
-        pdfDoc       = await pdfjsLib.getDocument(url).promise;
+        pdfDoc        = await pdfjsLib.getDocument(url).promise;
         pdfTotalPages = pdfDoc.numPages;
         await renderAllPages();
       } catch (err) {
@@ -1781,7 +1837,7 @@ details.nested ul {
     pdfOverlay.classList.remove('open');
     pdfOverlay.style.display = 'none';
     pdfCanvasWrap.innerHTML = '';
-    pdfDoc = null;
+    pdfDoc = null; pageData = [];
   }
 
   pdfLink.addEventListener('click', e => {
