@@ -477,6 +477,10 @@ details.nested ul {
 
 .qrh-btn:hover { background: #991B1B; }
 
+.qrh-icon--das  { background: #0C4A6E; }
+.qrh-btn--das   { background: #0C4A6E; }
+.qrh-btn--das:hover { background: #082F49; }
+
 .qrh-btn-arrow {
   font-size: 1rem;
   line-height: 1;
@@ -1154,13 +1158,166 @@ details.nested ul {
       </div>
     </details>
 
-    <details>
+    <details class="has-nested">
       <summary>Remifentanil PCA</summary>
-      <ul>
-        <li>Consider if neuraxial analgesia contraindicated or declined</li>
-        <li>Remifentanil PCA under local protocol</li>
-        <li>Requires 1:1 midwifery care and continuous monitoring</li>
-      </ul>
+      <div class="nested-details">
+
+        <details class="nested">
+          <summary>Indications</summary>
+          <ul>
+            <li>Alternative analgesia when neuraxial is contraindicated or declined</li>
+            <li>Coagulopathy, thrombocytopenia or anticoagulation</li>
+            <li>Metalwork in lumbar spine</li>
+            <li>Sepsis</li>
+            <li>Multiple failed epidural attempts</li>
+            <li>Patient request / refusal of epidural</li>
+          </ul>
+        </details>
+
+        <details class="nested">
+          <summary>Contraindications</summary>
+          <ul>
+            <li><strong>Absolute:</strong>
+              <ul>
+                <li>Allergy to remifentanil</li>
+                <li>No trained, certified midwife available for 1:1 care</li>
+                <li>Drug dependency (unpredictable effects)</li>
+                <li>Intrauterine death — contraindicated (use morphine PCA instead)</li>
+                <li>Pethidine or other parenteral opioid within preceding 4 hours</li>
+              </ul>
+            </li>
+            <li><strong>Cautions — discuss with consultant anaesthetist:</strong>
+              <ul>
+                <li>Severe cardiac or respiratory disease</li>
+                <li>Pre-eclampsia</li>
+                <li>Gestational age &lt;36 weeks</li>
+                <li>Non-reassuring CTG</li>
+                <li>BMI &gt;40</li>
+                <li>Learning difficulty</li>
+              </ul>
+            </li>
+          </ul>
+        </details>
+
+        <details class="nested">
+          <summary>Preparation &amp; prescription</summary>
+          <ul>
+            <li>Confirm trained midwife available for continuous 1:1 care</li>
+            <li>Discuss with consultant anaesthetist before starting</li>
+            <li>Dedicated pink (20G) IV cannula — as proximal as possible</li>
+            <li>Establish SpO₂ monitoring before starting; monitor continuously</li>
+            <li>Give patient information leaflet; explain side-effects including ≥10% risk of transient desaturation</li>
+            <li><strong>Prescription (anaesthetist to prescribe on iCare):</strong>
+              <ul>
+                <li>Remifentanil 2 mg in 40 ml 0.9% NaCl (50 mcg/ml)</li>
+                <li>Initial bolus 0.4 ml (20 mcg) over 15 sec, 3 min lockout</li>
+                <li>Increase to max 0.8 ml (40 mcg) if analgesia inadequate</li>
+                <li>Replace every 24 hours</li>
+                <li>Ondansetron 4 mg IV 8 hourly PRN</li>
+                <li>Chlorphenamine 10 mg IV TDS PRN</li>
+                <li>Naloxone 100–400 mcg IV increments for reversal if needed</li>
+              </ul>
+            </li>
+          </ul>
+        </details>
+
+        <details class="nested">
+          <summary>Monitoring</summary>
+          <ul>
+            <li>Midwife to complete remifentanil PCA Observation Chart</li>
+            <li>Anaesthetist assesses for 20 mins / 5 contractions after starting</li>
+            <li>Observations every 30 mins: pain score, sedation score, RR, SpO₂</li>
+            <li>Commence O₂ via nasal specs if SpO₂ &lt;95% (max 2 L/min)</li>
+            <li><strong>Stop PCA and call anaesthetist if:</strong>
+              <ul>
+                <li>Sedation score 3 (unconscious/difficult to wake)</li>
+                <li>RR &lt;8 breaths/min</li>
+                <li>SpO₂ remains &lt;94% despite O₂ via nasal specs</li>
+                <li>Pump alarming — do not flush line</li>
+              </ul>
+            </li>
+          </ul>
+        </details>
+
+        <details class="nested">
+          <summary>Apnoea management</summary>
+          <ul>
+            <li>Apnoea &gt;10 sec or RR &lt;8: encourage to breathe, give O₂, remove PCA button from patient</li>
+            <li>No response by 20 sec:
+              <ul>
+                <li>Pull emergency buzzer</li>
+                <li>Lay flat, full left lateral position</li>
+                <li>100% O₂ via self-inflating bag and mask until emergency team arrives</li>
+              </ul>
+            </li>
+            <li>If verbal encouragement needed to breathe on ≥2 occasions: withhold PCA until reviewed by anaesthetist</li>
+          </ul>
+        </details>
+
+        <details class="nested">
+          <summary>Safety points</summary>
+          <ul>
+            <li>Always use a dedicated cannula — no Y connectors or three-way taps</li>
+            <li>Only the patient may press the PCA button</li>
+            <li>Do not flush the line at any point</li>
+            <li>Remove cannula on completion without flushing</li>
+            <li>Eating not recommended; clear fluids permitted</li>
+            <li>Consider omeprazole if likely to be on remifentanil &gt;4 hours</li>
+            <li>Currently available at UHL only</li>
+          </ul>
+        </details>
+
+      </div>
+    </details>
+
+    <details class="has-nested">
+      <summary>Analgesia for labour after intra-uterine death</summary>
+      <div class="nested-details">
+
+        <details class="nested">
+          <summary>Overview</summary>
+          <ul>
+            <li>Can occur at various gestational ages (~18 weeks to term)</li>
+            <li>Priorities differ significantly from labouring with a live baby</li>
+            <li>Consider and discuss both epidural and opioid PCA options with patient</li>
+            <li>Take into account: gestational age, pain levels, anticipated duration of labour, increased risk of sepsis and coagulopathy</li>
+            <li><strong>Epidural</strong> most frequently used in longer, late-pregnancy labours</li>
+            <li><strong>Opioid PCA</strong> most frequently used in shorter, earlier-pregnancy labours</li>
+            <li>Remifentanil PCA is <strong>contraindicated</strong> following IUD</li>
+          </ul>
+        </details>
+
+        <details class="nested">
+          <summary>Morphine IV PCA</summary>
+          <ul>
+            <li>Preferred opioid option — familiar to midwives, ease of administration</li>
+            <li>Prescribe morphine IV PCA 1 mg/ml via standard theatre protocol on iCare</li>
+            <li>Pump to be set up and programmed by competent anaesthetic nurse/ODP</li>
+            <li>Anaesthetist to connect, demonstrate use to patient, then hand over to midwife</li>
+            <li>Give initial dose: oral Oramorph or IM morphine</li>
+            <li>Also prescribe:
+              <ul>
+                <li>Ondansetron 4 mg IV 8 hourly regular + PRN cyclizine 50 mg IV (max 8 hourly)</li>
+                <li>Naloxone 400 mcg IV for emergency reversal</li>
+                <li>Paracetamol and ibuprofen PO (unless contraindicated)</li>
+              </ul>
+            </li>
+            <li>If PCA insufficient, consider converting to epidural (standard protocol)</li>
+          </ul>
+        </details>
+
+        <details class="nested">
+          <summary>Monitoring &amp; follow-up</summary>
+          <ul>
+            <li>1:1 midwifery care required</li>
+            <li>Continuous oxygen available</li>
+            <li>Observations: RR, sedation score, SpO₂, pain scores</li>
+            <li>Anaesthetist to review regularly — ensure PCA effective and no adverse effects</li>
+            <li>Follow up patient post-delivery</li>
+          </ul>
+        </details>
+
+      </div>
     </details>
 
   </div><!-- /labour -->
@@ -1189,9 +1346,27 @@ details.nested ul {
       </div>
       <div class="qrh-body">
         <p class="qrh-title">OAA Quick Reference Handbook</p>
-        <p class="qrh-desc">Emergency guidance for obstetric anaesthesia — including PPH, eclampsia, high/total spinal and more.</p>
+        <p class="qrh-desc">Emergency guidance for obstetric anaesthesia — including PPH, eclampsia, high/total spinal, and more.</p>
         <button class="qrh-btn" id="oaaQrhBtn">
           <span class="qrh-btn-arrow">↗</span> Open OAA QRH
+        </button>
+      </div>
+    </div>
+
+    <div class="qrh-card">
+      <div class="qrh-icon qrh-icon--das" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <!-- Airway / intubation icon: tube shape -->
+          <path d="M12 3C9 3 6 5 6 8v5c0 1.5.5 3 2 4l1 3h6l1-3c1.5-1 2-2.5 2-4V8c0-3-3-5-6-5z" stroke="white" stroke-width="1.6" fill="white" fill-opacity="0.15"/>
+          <line x1="12" y1="3" x2="12" y2="10" stroke="white" stroke-width="2" stroke-linecap="round"/>
+          <path d="M9 10 h6" stroke="white" stroke-width="1.8" stroke-linecap="round"/>
+        </svg>
+      </div>
+      <div class="qrh-body">
+        <p class="qrh-title">DAS Obstetric Failed Intubation Guidelines</p>
+        <p class="qrh-desc">OAA/DAS guidelines for management of difficult or failed tracheal intubation in obstetrics.</p>
+        <button class="qrh-btn qrh-btn--das" id="dasBtn">
+          <span class="qrh-btn-arrow">↗</span> Open DAS Guidelines
         </button>
       </div>
     </div>
@@ -1617,40 +1792,27 @@ details.nested ul {
     document.head.appendChild(s);
   }
 
-  /* ── Render one page, store data, return wrapper div ── */
+  /* ── Render one page to a single canvas ── */
   async function renderOnePage(pageNum) {
     const page     = await pdfDoc.getPage(pageNum);
     const viewport = page.getViewport({ scale: pdfScale });
 
-    /* Wrapper holds canvas + highlight overlay */
     const wrap = document.createElement('div');
-    wrap.style.cssText = `position:relative;display:inline-block;line-height:0;`;
+    wrap.style.cssText = 'display:block;line-height:0;';
     wrap.dataset.pageNum = pageNum;
 
-    /* Main canvas */
     const canvas = document.createElement('canvas');
     canvas.className = 'pdf-page-canvas';
     canvas.width  = viewport.width;
     canvas.height = viewport.height;
     wrap.appendChild(canvas);
-
-    /* Highlight overlay canvas (drawn on top) */
-    const hl = document.createElement('canvas');
-    hl.width  = viewport.width;
-    hl.height = viewport.height;
-    hl.style.cssText = 'position:absolute;top:0;left:0;pointer-events:none;';
-    wrap.appendChild(hl);
-
     pdfCanvasWrap.appendChild(wrap);
 
-    /* Render PDF content */
     await page.render({ canvasContext: canvas.getContext('2d'), viewport }).promise;
 
-    /* Get text content with transform info */
+    /* Store text for page-level search */
     const content = await page.getTextContent();
-    const items   = content.items; /* each has .str, .transform, .width, .height */
-
-    pageData[pageNum - 1] = { canvas, hl, ctx: hl.getContext('2d'), viewport, items };
+    pageData[pageNum - 1] = { text: content.items.map(i => i.str).join(' ') };
     return wrap;
   }
 
@@ -1704,84 +1866,11 @@ details.nested ul {
   pdfNextBtn.addEventListener('click', () => { if (pdfCurrentPage < pdfTotalPages) scrollToPage(pdfCurrentPage + 1); });
 
   /* ══════════════════════════════════════
-     TEXT SEARCH WITH CANVAS HIGHLIGHTS
+     TEXT SEARCH — page-level, no highlights
   ══════════════════════════════════════ */
 
-  /* Map a PDF text item's bounding box onto canvas coordinates.
-     item.transform = [a, b, c, d, e, f]  (PDF CTM)
-       e, f = origin of the text run in PDF user space (bottom-left origin)
-       a, d = x/y scale (font size × CSS scale)
-     item.width, item.height = dimensions in PDF user units */
-  function itemRect(item, viewport) {
-    const [a, b, c, d, e, f] = item.transform;
-
-    /* Font height from the scale component of the matrix */
-    const fontH = Math.sqrt(b * b + d * d);
-    /* Width as reported by PDF.js in user units */
-    const w     = item.width;
-
-    /* Four corners of the text bounding box in PDF user space
-       PDF y=0 is at bottom, text baseline is at (e, f),
-       ascent goes UP by fontH */
-    const pts = [
-      [e,         f],
-      [e + w,     f],
-      [e + w,     f + fontH],
-      [e,         f + fontH]
-    ].map(([x, y]) => viewport.convertToViewportPoint(x, y));
-
-    const xs = pts.map(p => p[0]);
-    const ys = pts.map(p => p[1]);
-    const x0 = Math.min(...xs) - 1;
-    const y0 = Math.min(...ys) - 2;
-    const x1 = Math.max(...xs) + 1;
-    const y1 = Math.max(...ys) + 1;
-
-    return { x: x0, y: y0, width: x1 - x0, height: y1 - y0 };
-  }
-
-  /* Clear all highlight overlays */
-  function clearHighlights() {
-    pageData.forEach(pd => {
-      if (pd) pd.ctx.clearRect(0, 0, pd.hl.width, pd.hl.height);
-    });
-  }
-
-  /* Draw highlight rectangles for all matches; active match is orange, others yellow */
-  function drawHighlights() {
-    clearHighlights();
-    allMatches.forEach((m, idx) => {
-      const pd = pageData[m.pageIdx];
-      if (!pd) return;
-      const item = pd.items[m.itemIdx];
-      if (!item) return;
-      const rect = itemRect(item, pd.viewport);
-      const isActive = idx === matchCurrent;
-      pd.ctx.fillStyle = isActive ? 'rgba(255,140,0,0.55)' : 'rgba(255,220,0,0.4)';
-      pd.ctx.fillRect(rect.x, rect.y, rect.width, rect.height);
-      if (isActive) {
-        pd.ctx.strokeStyle = 'rgba(200,80,0,0.8)';
-        pd.ctx.lineWidth = 1.5;
-        pd.ctx.strokeRect(rect.x, rect.y, rect.width, rect.height);
-      }
-    });
-  }
-
-  /* Build match list across all pages */
-  function findMatches(term) {
-    allMatches = [];
-    if (!term || term.length < 2) return;
-    const re = new RegExp(term.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'), 'gi');
-    pageData.forEach((pd, pageIdx) => {
-      if (!pd) return;
-      pd.items.forEach((item, itemIdx) => {
-        if (re.test(item.str)) {
-          allMatches.push({ pageIdx, itemIdx });
-          re.lastIndex = 0; /* reset after test() */
-        }
-      });
-    });
-  }
+  let allMatches   = [];   /* page numbers (1-based) */
+  let matchCurrent = -1;
 
   function updateSearchUI() {
     if (allMatches.length === 0) {
@@ -1797,18 +1886,25 @@ details.nested ul {
 
   function runPdfSearch(term) {
     term = term.trim();
-    findMatches(term);
-    matchCurrent = allMatches.length > 0 ? 0 : -1;
-    drawHighlights();
+    allMatches = [];
+    matchCurrent = -1;
+    if (term.length >= 2) {
+      const re = new RegExp(term.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'), 'gi');
+      pageData.forEach((pd, idx) => {
+        if (pd && re.test(pd.text)) allMatches.push(idx + 1);
+      });
+      if (allMatches.length > 0) {
+        matchCurrent = 0;
+        scrollToPage(allMatches[0]);
+      }
+    }
     updateSearchUI();
-    if (allMatches.length > 0) scrollToPage(allMatches[0].pageIdx + 1);
   }
 
   function jumpToMatch(idx) {
     matchCurrent = (idx + allMatches.length) % allMatches.length;
-    drawHighlights();
     updateSearchUI();
-    scrollToPage(allMatches[matchCurrent].pageIdx + 1);
+    scrollToPage(allMatches[matchCurrent]);
   }
 
   pdfSearchInput.addEventListener('input',   () => runPdfSearch(pdfSearchInput.value));
@@ -1852,7 +1948,7 @@ details.nested ul {
     pdfOverlay.classList.remove('open');
     pdfOverlay.style.display = 'none';
     pdfCanvasWrap.innerHTML = '';
-    pdfDoc = null; pageData = [];
+    pdfDoc = null; pageData = []; allMatches = [];
   }
 
   pdfLink.addEventListener('click', e => {
@@ -1866,6 +1962,13 @@ details.nested ul {
   if (oaaQrhBtn) {
     oaaQrhBtn.addEventListener('click', () => {
       openPdf('oaa-qrh.pdf', 'OAA Quick Reference Handbook');
+    });
+  }
+
+  const dasBtn = document.getElementById('dasBtn');
+  if (dasBtn) {
+    dasBtn.addEventListener('click', () => {
+      openPdf('das-failed-intubation.pdf', 'DAS Obstetric Failed Intubation Guidelines');
     });
   }
 
