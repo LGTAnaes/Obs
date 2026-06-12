@@ -8,48 +8,54 @@
 <meta name="theme-color" content="#0369A1">
 
 <style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap');
+
 :root {
-  --brand-bg:     #0369A1;   /* labour teal-blue — header & html bg */
-  --brand-dark:   #0C4A6E;   /* deep ocean — search bar, summaries */
-  --brand-mid:    #0369A1;   /* core teal-blue */
-  --brand-light:  #0284C7;   /* mid-light blue */
-  --brand-accent: #38BDF8;   /* sky accent — nested borders */
-  --brand-deep:   #082F49;   /* darkest navy */
-  --nhs-grey:     #425563;
-  --bg:           #F0F9FF;   /* lightest sky tint — page background */
-  --card:         #ffffff;
-  --highlight:    #FEF08A;
+  --brand-bg:      #0369A1;
+  --brand-dark:    #0C4A6E;
+  --brand-mid:     #0369A1;
+  --brand-light:   #0284C7;
+  --brand-accent:  #38BDF8;
+  --brand-deep:    #082F49;
+  --nhs-grey:      #64748B;
+  --bg:            #F0F9FF;
+  --card:          #ffffff;
+  --highlight:     #FEF08A;
   --highlight-border: #EAB308;
+  --radius-sm:     10px;
+  --radius-md:     16px;
+  --radius-lg:     20px;
+  --shadow-sm:     0 1px 3px rgba(0,0,0,0.08), 0 1px 2px rgba(0,0,0,0.05);
+  --shadow-md:     0 4px 16px rgba(0,0,0,0.10), 0 2px 6px rgba(0,0,0,0.06);
+  --shadow-lg:     0 8px 32px rgba(0,0,0,0.12), 0 4px 12px rgba(0,0,0,0.07);
 }
 
 *, *::before, *::after { box-sizing: border-box; }
 
-html {
-  background: var(--bg);   /* matches page — no dark bleed at bottom on iOS overscroll */
-}
+html { background: var(--brand-bg); }
 
 body {
   margin: 0;
-  font-family: Arial, Helvetica, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
   background: var(--bg);
-  color: #212121;
-  line-height: 1.45;
+  color: #1E293B;
+  line-height: 1.5;
   padding-top: env(safe-area-inset-top);
   padding-left: env(safe-area-inset-left);
   padding-right: env(safe-area-inset-right);
   padding-bottom: env(safe-area-inset-bottom);
+  -webkit-font-smoothing: antialiased;
 }
 
-/* ── HEADER ── */
+/* ══ HEADER ══ */
 header {
-  background: var(--brand-bg);
+  background: linear-gradient(135deg, #0C4A6E 0%, #0369A1 55%, #0284C7 100%);
   color: white;
   margin-left: calc(-1 * env(safe-area-inset-left));
   margin-right: calc(-1 * env(safe-area-inset-right));
-  padding: 0.9rem calc(1rem + env(safe-area-inset-right)) 0.9rem calc(1rem + env(safe-area-inset-left));
+  padding: 1rem calc(1rem + env(safe-area-inset-right)) 1.1rem calc(1rem + env(safe-area-inset-left));
+  box-shadow: 0 4px 20px rgba(0,0,0,0.22);
 }
-
-/* Single centred row: logo | titles | info btn — all vertically centred */
 .header-top {
   display: flex;
   align-items: center;
@@ -58,31 +64,26 @@ header {
   max-width: 900px;
   margin: 0 auto;
 }
-
-/* ── LOGO — reset button, inline ── */
 .logo-btn {
   background: none;
   border: none;
   padding: 0;
   cursor: pointer;
   -webkit-tap-highlight-color: transparent;
-  border-radius: 16px;
+  border-radius: var(--radius-md);
   flex-shrink: 0;
   display: flex;
   align-items: center;
+  transition: opacity 0.15s, transform 0.15s;
 }
-
-.logo-btn:active { opacity: 0.7; }
-
+.logo-btn:active { opacity: 0.75; transform: scale(0.94); }
 .logo {
   width: 58px;
   height: 58px;
   display: block;
-  border-radius: 16px;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.35);
+  border-radius: var(--radius-md);
+  box-shadow: 0 2px 12px rgba(0,0,0,0.3), 0 0 0 2px rgba(255,255,255,0.15);
 }
-
-/* ── HEADER TITLE BLOCK ── */
 .header-titles {
   flex: 1;
   text-align: center;
@@ -90,245 +91,219 @@ header {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 0.1rem;
 }
-
 header h1 {
-  margin: 0;
-  font-size: 1.45rem;
-  font-weight: 900;
-  letter-spacing: -0.01em;
+  margin: 0 0 0.1rem;
+  font-size: 1.25rem;
+  font-weight: 800;
+  letter-spacing: -0.02em;
   line-height: 1.2;
-  text-shadow: 0 1px 3px rgba(0,0,0,0.2);
 }
-
 header p {
   margin: 0;
-  font-size: 0.88rem;
-  opacity: 0.82;
-  letter-spacing: 0.02em;
+  font-size: 0.75rem;
+  font-weight: 500;
+  opacity: 0.72;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
 }
-
-/* ── INFO BUTTON — inline, right side ── */
 .info-button {
   flex-shrink: 0;
-  width: 44px;
-  height: 44px;
+  width: 42px;
+  height: 42px;
   border-radius: 50%;
-  border: 2px solid rgba(255,255,255,0.7);
-  background: transparent;
+  border: 1.5px solid rgba(255,255,255,0.4);
+  background: rgba(255,255,255,0.12);
   color: white;
   cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
+  transition: background 0.15s;
+  backdrop-filter: blur(4px);
 }
+.info-button:hover { background: rgba(255,255,255,0.22); }
 
-/* ── SEARCH BAR ── */
+/* ══ SEARCH ══ */
 .search-wrap {
-  background: var(--brand-dark);
-  padding: 0.75rem 1rem;
+  background: #0C4A6E;
+  padding: 0.65rem 1rem;
   position: sticky;
   top: 0;
   z-index: 100;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.18);
 }
-
-.search-inner {
-  max-width: 900px;
-  margin: auto;
-  position: relative;
-}
+.search-inner { max-width: 900px; margin: auto; position: relative; }
 
 #searchInput {
   width: 100%;
-  padding: 0.75rem 2.8rem 0.75rem 1rem;
+  padding: 0.68rem 2.6rem 0.68rem 2.7rem;
   border: none;
-  border-radius: 8px;
-  font-size: 1.05rem;
-  background: white;
-  color: #212121;
+  border-radius: 50px;
+  font-size: 0.97rem;
+  font-family: inherit;
+  font-weight: 500;
+  background: rgba(255,255,255,0.97);
+  color: #1E293B;
   outline: none;
+  transition: box-shadow 0.2s;
 }
+#searchInput:focus { box-shadow: 0 0 0 3px rgba(56,189,248,0.55); }
+#searchInput::placeholder { color: #94A3B8; font-weight: 400; }
 
-#searchInput:focus {
-  box-shadow: 0 0 0 3px rgba(255,255,255,0.5);
+.search-icon {
+  position: absolute;
+  left: 0.9rem;
+  top: 50%;
+  transform: translateY(-50%);
+  pointer-events: none;
+  color: #94A3B8;
+  display: flex;
 }
 
 .search-clear {
   position: absolute;
-  right: 0.7rem;
+  right: 0.72rem;
   top: 50%;
   transform: translateY(-50%);
-  background: none;
+  background: #E2E8F0;
   border: none;
-  font-size: 1.3rem;
-  color: #888;
+  border-radius: 50%;
+  width: 22px;
+  height: 22px;
+  font-size: 0.72rem;
+  color: #64748B;
   cursor: pointer;
   display: none;
+  align-items: center;
+  justify-content: center;
   line-height: 1;
-  padding: 0.2rem;
+  padding: 0;
 }
+.search-clear.visible-btn { display: flex; }
 
-/* ── SEARCH RESULTS DROPDOWN ── */
 #searchResults {
   position: absolute;
-  top: calc(100% + 4px);
-  left: 0;
-  right: 0;
+  top: calc(100% + 6px);
+  left: 0; right: 0;
   background: white;
-  border-radius: 6px;
-  box-shadow: 0 6px 24px rgba(0,0,0,0.18);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-lg);
   max-height: 60vh;
   overflow-y: auto;
   display: none;
   z-index: 200;
+  overflow: hidden;
 }
-
 #searchResults.visible { display: block; }
 
 .result-item {
-  padding: 0.85rem 1rem;
+  padding: 0.8rem 1.1rem;
   cursor: pointer;
-  border-bottom: 1px solid #eee;
-  transition: background 0.15s;
+  border-bottom: 1px solid #F1F5F9;
+  transition: background 0.12s;
 }
-
 .result-item:last-child { border-bottom: none; }
-
-.result-item:hover,
-.result-item:focus {
-  background: #e8f0fe;
-  outline: none;
-}
+.result-item:hover, .result-item:focus { background: #F0F9FF; outline: none; }
 
 .result-section {
-  font-size: 0.75rem;
+  font-size: 0.67rem;
   font-weight: 700;
   text-transform: uppercase;
-  letter-spacing: 0.04em;
-  color: var(--brand-dark);
-  margin-bottom: 0.2rem;
+  letter-spacing: 0.07em;
+  color: var(--brand-mid);
+  margin-bottom: 0.18rem;
 }
+.result-title { font-size: 0.95rem; font-weight: 700; color: #1E293B; }
+.result-parent { font-weight: 500; color: #94A3B8; font-size: 0.87rem; }
+.result-snippet { font-size: 0.81rem; color: #64748B; margin-top: 0.18rem; line-height: 1.4; }
+.result-snippet mark { background: var(--highlight); color: inherit; border-radius: 3px; padding: 0 2px; }
+.no-results { padding: 1.1rem; color: #94A3B8; font-size: 0.9rem; text-align: center; }
 
-.result-title {
-  font-size: 1rem;
-  font-weight: 700;
-  color: #212121;
-}
+/* ══ LAYOUT ══ */
+.container { max-width: 900px; margin: auto; padding: 0.9rem 0.8rem 2rem; }
 
-.result-parent {
-  font-weight: 400;
-  color: #777;
-  font-size: 0.9rem;
-}
-
-.result-snippet {
-  font-size: 0.88rem;
-  color: #555;
-  margin-top: 0.2rem;
-}
-
-.result-snippet mark {
-  background: var(--highlight);
-  color: inherit;
-  border-radius: 2px;
-  padding: 0 1px;
-}
-
-.no-results {
-  padding: 1rem;
-  color: #666;
-  font-size: 0.95rem;
-}
-
-/* ── LAYOUT ── */
-.container {
-  max-width: 900px;
-  margin: auto;
-  padding: 1rem 0.9rem;
-}
-
-/* ── NAV BUTTONS ── */
+/* ══ NAV BUTTONS ══ */
 .nav-button {
   width: 100%;
   border: none;
-  padding: 1.1rem 1.2rem;
-  margin-bottom: 0.5rem;
-  font-size: 1.15rem;
-  font-weight: 700;
-  border-radius: 10px;
+  padding: 0;
+  margin-bottom: 0.55rem;
+  border-radius: var(--radius-md);
   cursor: pointer;
   text-align: left;
   display: flex;
-  justify-content: space-between;
-  align-items: center;
+  align-items: stretch;
   color: white;
-  letter-spacing: 0.01em;
-  scroll-margin-top: 68px; /* clears sticky search bar (~60px) + breathing room */
+  scroll-margin-top: 68px;
+  box-shadow: var(--shadow-md);
+  overflow: hidden;
+  transition: transform 0.15s, box-shadow 0.15s, filter 0.15s;
+  -webkit-tap-highlight-color: transparent;
 }
+.nav-button:active { transform: scale(0.985); box-shadow: var(--shadow-sm); }
+.nav-button.open { filter: brightness(0.86); }
 
-/* ── NAV BUTTON ICON + LABEL layout ── */
 .nav-icon {
   flex-shrink: 0;
-  width: 2.4rem;
-  height: 2.4rem;
-  background: rgba(255,255,255,0.18);
-  border-radius: 8px;
+  width: 3.1rem;
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-right: 0.75rem;   /* clear space between icon and label */
+  background: rgba(0,0,0,0.16);
 }
-
-.nav-icon svg {
-  width: 1.45rem;
-  height: 1.45rem;
-}
+.nav-icon svg { width: 1.45rem; height: 1.45rem; }
 
 .nav-label {
   flex: 1;
+  padding: 0.95rem 0.85rem;
+  font-size: 1rem;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  display: flex;
+  align-items: center;
 }
 
-.nav-button.lscs        { background: #0C4A6E; }  /* deep ocean  — Caesarean */
-.nav-button.labour      { background: #0369A1; }  /* teal-blue   — Labour */
-.nav-button.procedures  { background: #0284C7; }  /* mid-blue    — Procedures */
-.nav-button.emergencies { background: #B91C1C; }  /* red         — Emergencies */
-.nav-button.contacts    { background: #075985; }  /* steel-blue  — Contacts */
-
-.nav-button.open { filter: brightness(0.88); }
-
-/* Chevron */
-.chevron {
+.nav-chevron-wrap {
   flex-shrink: 0;
-  width: 0.7rem;
-  height: 0.7rem;
-  border-right: 2.5px solid white;
-  border-bottom: 2.5px solid white;
+  width: 2.6rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0,0,0,0.1);
+}
+
+.chevron {
+  width: 0.58rem;
+  height: 0.58rem;
+  border-right: 2.5px solid rgba(255,255,255,0.8);
+  border-bottom: 2.5px solid rgba(255,255,255,0.8);
   transform: rotate(-45deg);
-  transition: transform 0.25s ease;
+  transition: transform 0.25s cubic-bezier(0.4,0,0.2,1);
 }
 .nav-button.open .chevron { transform: rotate(45deg); }
 
-/* ── ACCORDION SECTIONS ── */
+.nav-button.lscs        { background: linear-gradient(135deg, #0C4A6E, #0F5C8A); }
+.nav-button.labour      { background: linear-gradient(135deg, #0369A1, #0482C8); }
+.nav-button.procedures  { background: linear-gradient(135deg, #0284C7, #039BEA); }
+.nav-button.emergencies { background: linear-gradient(135deg, #991B1B, #C41F1F); }
+.nav-button.contacts    { background: linear-gradient(135deg, #075985, #0872A8); }
+
+/* ══ ACCORDION ══ */
 .section {
   background: var(--card);
-  border-radius: 10px;
-  margin-bottom: 0.5rem;
+  border-radius: var(--radius-md);
+  margin-bottom: 0.55rem;
   overflow: hidden;
   max-height: 0;
   opacity: 0;
-  transition: max-height 0.45s ease, opacity 0.25s ease;
+  transition: max-height 0.45s cubic-bezier(0.4,0,0.2,1), opacity 0.25s ease;
+  box-shadow: var(--shadow-sm);
 }
-.section.open {
-  max-height: 9999px;
-  opacity: 1;
-}
+.section.open { max-height: 9999px; opacity: 1; box-shadow: var(--shadow-md); }
 
-/* ── DETAILS / SUMMARY ── */
-details {
-  padding: 1rem 1.1rem;
-  border-bottom: 1px solid #eef0f3;
-}
+/* ── Top-level details ── */
+details { padding: 0; border-bottom: 1px solid #F1F5F9; }
 details:last-child { border-bottom: none; }
 
 summary {
@@ -339,200 +314,173 @@ summary {
   display: flex;
   align-items: center;
   gap: 0.6rem;
-  font-size: 1.05rem;
-  line-height: 1.35;
+  font-size: 0.98rem;
+  line-height: 1.4;
+  padding: 0.95rem 1.1rem;
+  transition: background 0.12s;
+  user-select: none;
+  -webkit-user-select: none;
 }
+summary:hover { background: #F8FAFC; }
 summary::-webkit-details-marker { display: none; }
 
 summary::before {
   content: '';
   display: inline-block;
-  width: 0.55rem;
-  height: 0.55rem;
+  width: 0.5rem;
+  height: 0.5rem;
   border-right: 2.5px solid var(--brand-dark);
   border-bottom: 2.5px solid var(--brand-dark);
   transform: rotate(-45deg);
-  transition: transform 0.2s;
+  transition: transform 0.22s cubic-bezier(0.4,0,0.2,1);
   flex-shrink: 0;
-  margin-top: 1px;
 }
 details[open] > summary::before { transform: rotate(45deg); }
+details[open] > summary { background: #F8FAFC; }
 
-/* ── HIGHLIGHT (search jump target) ── */
-details.search-highlight {
-  background: #fffde7;
-  border-left: 3px solid var(--highlight-border);
-  animation: pulse-fade 2.5s ease forwards;
-}
+details > ul, details > p { padding: 0.1rem 1.1rem 0.9rem 2.25rem; margin: 0; }
 
-@keyframes pulse-fade {
-  0%   { background: #fff9c4; }
-  40%  { background: #fff9c4; }
-  100% { background: white; }
-}
-
-mark.search-term {
-  background: var(--highlight);
-  border-radius: 2px;
-  padding: 0 1px;
-}
-
-ul { padding-left: 1.4rem; margin: 0.5rem 0; }
-ul ul { margin-left: 0.5rem; }
-li { margin-bottom: 0.4rem; font-size: 1rem; line-height: 1.45; }
-
-/* ── NESTED DETAILS (e.g. Epidural Troubleshooting sub-items) ── */
-.nested-details {
-  margin-top: 0.6rem;
-  border-top: 1px solid #eef0f3;
-}
+/* ── Nested details ── */
+.nested-details { background: #F8FAFC; border-top: 1px solid #E2E8F0; }
 
 details.nested {
-  padding: 0.8rem 0.9rem 0.8rem 1.1rem;
-  border-bottom: 1px solid #eef0f3;
-  border-left: 4px solid var(--brand-accent);
-  margin: 0;
-  background: #f0f5fb;
+  padding: 0;
+  border-bottom: 1px solid #E2E8F0;
+  border-left: 3px solid var(--brand-accent);
+  background: transparent;
 }
-
-details.nested:last-child {
-  border-bottom: none;
-}
+details.nested:last-child { border-bottom: none; }
 
 details.nested > summary {
-  font-size: 1rem;
-  font-weight: 700;
+  font-size: 0.92rem;
+  font-weight: 600;
   color: var(--brand-mid);
+  padding: 0.72rem 1rem 0.72rem 1.1rem;
+  background: transparent;
+}
+details.nested > summary:hover { background: #EFF6FF; }
+details.nested[open] > summary { background: #EFF6FF; }
+details.nested > summary::before { border-color: var(--brand-mid); width: 0.43rem; height: 0.43rem; }
+details.nested > ul, details.nested > p { padding: 0.1rem 1rem 0.8rem 2.1rem; }
+
+/* ── Search highlight ── */
+details.search-highlight { animation: pulse-fade 2.5s ease forwards; }
+@keyframes pulse-fade {
+  0%,40% { background: #FFFBEB; }
+  100%   { background: transparent; }
 }
 
-details.nested > summary::before {
-  border-color: var(--brand-mid);
-  width: 0.5rem;
-  height: 0.5rem;
-}
+/* ── Lists ── */
+ul { padding-left: 1.2rem; margin: 0.35rem 0; }
+ul ul { margin-left: 0.35rem; }
+li { margin-bottom: 0.32rem; font-size: 0.94rem; line-height: 1.5; color: #334155; }
+li strong { color: #1E293B; }
 
-details.nested[open] > summary::before {
-  transform: rotate(45deg);
-}
-
-details.nested ul {
-  margin-top: 0.5rem;
-}
-
-/* ── OAA QRH CARD ── */
+/* ══ QRH CARDS ══ */
 .qrh-card {
   display: flex;
   gap: 1rem;
   align-items: flex-start;
-  padding: 1.3rem 1.1rem;
+  padding: 1.15rem 1.1rem;
+  border-bottom: 1px solid #F1F5F9;
 }
+.qrh-card:last-child { border-bottom: none; }
 
 .qrh-icon {
   flex-shrink: 0;
-  width: 2.6rem;
-  height: 2.6rem;
+  width: 2.7rem;
+  height: 2.7rem;
   background: #B91C1C;
-  border-radius: 50%;
+  border-radius: var(--radius-sm);
   display: flex;
   align-items: center;
   justify-content: center;
   color: white;
+  box-shadow: var(--shadow-sm);
 }
-
-.qrh-icon svg {
-  width: 1.4rem;
-  height: 1.4rem;
-}
-
-.qrh-body { flex: 1; }
-
-.qrh-title {
-  font-weight: 700;
-  font-size: 1.05rem;
-  color: #212121;
-  margin: 0 0 0.35rem;
-}
-
-.qrh-desc {
-  font-size: 0.95rem;
-  color: #555;
-  margin: 0 0 0.9rem;
-  line-height: 1.45;
-}
+.qrh-icon svg { width: 1.35rem; height: 1.35rem; }
+.qrh-body { flex: 1; min-width: 0; }
+.qrh-title { font-weight: 700; font-size: 0.97rem; color: #1E293B; margin: 0 0 0.22rem; letter-spacing: -0.01em; }
+.qrh-desc { font-size: 0.85rem; color: #64748B; margin: 0 0 0.7rem; line-height: 1.45; }
 
 .qrh-btn {
   display: inline-flex;
   align-items: center;
-  gap: 0.4rem;
+  gap: 0.32rem;
   background: #B91C1C;
   color: white;
   border: none;
-  border-radius: 8px;
-  padding: 0.65rem 1.1rem;
-  font-size: 1rem;
+  border-radius: 50px;
+  padding: 0.5rem 1.05rem;
+  font-size: 0.87rem;
   font-weight: 700;
+  font-family: inherit;
   cursor: pointer;
-  transition: background 0.15s;
+  transition: background 0.15s, transform 0.12s;
+  box-shadow: var(--shadow-sm);
 }
-
 .qrh-btn:hover { background: #991B1B; }
-
-.qrh-icon--das  { background: #0C4A6E; }
-.qrh-btn--das   { background: #0C4A6E; }
+.qrh-btn:active { transform: scale(0.96); }
+.qrh-icon--das { background: #0C4A6E; }
+.qrh-btn--das  { background: #0C4A6E; }
 .qrh-btn--das:hover { background: #082F49; }
+.qrh-btn-arrow { font-size: 0.9rem; line-height: 1; }
 
-.qrh-btn-arrow {
-  font-size: 1rem;
-  line-height: 1;
-}
-
-/* ── FOOTER ── */
+/* ══ FOOTER ══ */
 .footer {
   text-align: center;
-  font-size: 0.875rem;
-  color: var(--nhs-grey);
-  padding: 1.25rem 1rem;
+  font-size: 0.78rem;
+  color: #94A3B8;
+  padding: 1.25rem 1rem 0.5rem;
+  letter-spacing: 0.01em;
 }
 
-/* ── INFO MODAL ── */
+/* ══ MODAL ══ */
 .modal {
   position: fixed;
   inset: 0;
-  background: rgba(0,0,0,0.5);
+  background: rgba(15,34,54,0.6);
+  backdrop-filter: blur(6px);
   display: none;
   align-items: center;
   justify-content: center;
   z-index: 1000;
+  padding: 1.5rem;
 }
 .modal.open { display: flex; }
-
 .modal-content {
   background: white;
-  max-width: 520px;
-  width: 90%;
-  border-radius: 8px;
-  padding: 1rem 1.25rem;
-  color: #212121;
+  max-width: 500px;
+  width: 100%;
+  border-radius: var(--radius-lg);
+  padding: 1.5rem;
+  color: #1E293B;
+  box-shadow: var(--shadow-lg);
 }
-.modal-content h2 { margin-top: 0; font-size: 1.2rem; }
-.modal-content a  { color: var(--brand-dark); font-weight: 600; }
-
+.modal-content h2 { margin: 0 0 0.65rem; font-size: 1.15rem; font-weight: 800; letter-spacing: -0.02em; }
+.modal-content p { font-size: 0.92rem; line-height: 1.6; color: #475569; margin: 0 0 0.6rem; }
+.modal-content a { color: var(--brand-mid); font-weight: 600; text-decoration: none; }
+.modal-content a:hover { text-decoration: underline; }
 .modal-close {
   background: var(--brand-dark);
   color: white;
   border: none;
-  padding: 0.5rem 0.75rem;
-  border-radius: 4px;
-  margin-top: 1rem;
+  padding: 0.55rem 1.25rem;
+  border-radius: 50px;
+  margin-top: 0.75rem;
   cursor: pointer;
+  font-size: 0.92rem;
+  font-weight: 700;
+  font-family: inherit;
+  transition: background 0.15s;
 }
+.modal-close:hover { background: var(--brand-deep); }
 
-/* ── PDF VIEWER OVERLAY ── */
-/* ── PDF.js VIEWER OVERLAY ── */
+/* ══ PDF VIEWER ══ */
 #pdfOverlay {
   position: fixed;
   inset: 0;
-  background: #1a1a1a;
+  background: #0F172A;
   z-index: 900;
   display: none;
   flex-direction: column;
@@ -542,129 +490,124 @@ details.nested ul {
 #pdfOverlay.open { display: flex; }
 
 .pdf-toolbar {
-  background: var(--brand-dark);
+  background: rgba(12,74,110,0.98);
+  backdrop-filter: blur(8px);
   color: white;
   display: flex;
   align-items: center;
-  gap: 0.5rem;
-  padding: 0.6rem 0.75rem;
+  gap: 0.45rem;
+  padding: 0.6rem 0.85rem;
   flex-shrink: 0;
   flex-wrap: wrap;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.28);
 }
-
 .pdf-back-btn {
-  background: transparent;
-  border: 2px solid rgba(255,255,255,0.7);
+  background: rgba(255,255,255,0.12);
+  border: 1px solid rgba(255,255,255,0.2);
   color: white;
-  border-radius: 6px;
-  padding: 0.4rem 0.75rem;
-  font-size: 0.95rem;
+  border-radius: 50px;
+  padding: 0.42rem 0.95rem;
+  font-size: 0.88rem;
   font-weight: 700;
+  font-family: inherit;
   cursor: pointer;
   display: flex;
   align-items: center;
-  gap: 0.4rem;
+  gap: 0.38rem;
   white-space: nowrap;
   flex-shrink: 0;
+  transition: background 0.15s;
 }
-.pdf-back-btn:hover { background: rgba(255,255,255,0.15); }
-
+.pdf-back-btn:hover { background: rgba(255,255,255,0.22); }
 .pdf-back-arrow {
   display: inline-block;
-  width: 0.45rem;
-  height: 0.45rem;
+  width: 0.4rem;
+  height: 0.4rem;
   border-left: 2px solid white;
   border-bottom: 2px solid white;
   transform: rotate(45deg);
 }
-
 .pdf-title {
-  font-size: 0.9rem;
+  font-size: 0.87rem;
   font-weight: 700;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
   flex: 1;
   min-width: 0;
+  letter-spacing: -0.01em;
 }
-
-/* Search row */
 .pdf-search-row {
   display: flex;
   align-items: center;
-  gap: 0.4rem;
+  gap: 0.35rem;
   width: 100%;
-  padding: 0 0 0.25rem;
+  padding-bottom: 0.18rem;
 }
-
 #pdfSearchInput {
   flex: 1;
-  padding: 0.45rem 0.7rem;
+  padding: 0.4rem 0.78rem;
   border: none;
-  border-radius: 6px;
-  font-size: 0.95rem;
-  background: rgba(255,255,255,0.15);
+  border-radius: 50px;
+  font-size: 0.9rem;
+  font-family: inherit;
+  background: rgba(255,255,255,0.14);
   color: white;
   outline: none;
   min-width: 0;
+  transition: background 0.15s;
 }
-#pdfSearchInput::placeholder { color: rgba(255,255,255,0.5); }
-#pdfSearchInput:focus { background: rgba(255,255,255,0.25); }
-
+#pdfSearchInput::placeholder { color: rgba(255,255,255,0.42); }
+#pdfSearchInput:focus { background: rgba(255,255,255,0.22); }
 .pdf-search-btn {
-  background: rgba(255,255,255,0.15);
-  border: none;
+  background: rgba(255,255,255,0.12);
+  border: 1px solid rgba(255,255,255,0.18);
   color: white;
-  border-radius: 6px;
-  padding: 0.45rem 0.65rem;
-  font-size: 0.85rem;
+  border-radius: 50%;
+  width: 30px;
+  height: 30px;
+  font-size: 0.88rem;
   cursor: pointer;
-  white-space: nowrap;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   flex-shrink: 0;
+  transition: background 0.15s;
 }
-.pdf-search-btn:hover { background: rgba(255,255,255,0.25); }
-.pdf-search-btn:disabled { opacity: 0.4; cursor: default; }
-
+.pdf-search-btn:hover:not(:disabled) { background: rgba(255,255,255,0.22); }
+.pdf-search-btn:disabled { opacity: 0.32; cursor: default; }
 #pdfSearchCount {
-  font-size: 0.8rem;
-  color: rgba(255,255,255,0.7);
+  font-size: 0.76rem;
+  color: rgba(255,255,255,0.62);
   white-space: nowrap;
   flex-shrink: 0;
-  min-width: 3rem;
+  min-width: 3.2rem;
   text-align: center;
 }
-
-/* Page nav row */
 .pdf-nav-row {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 0.5rem;
+  gap: 0.45rem;
   width: 100%;
-  padding-bottom: 0.1rem;
 }
-
 .pdf-page-btn {
-  background: rgba(255,255,255,0.15);
-  border: none;
+  background: rgba(255,255,255,0.12);
+  border: 1px solid rgba(255,255,255,0.18);
   color: white;
-  border-radius: 6px;
-  padding: 0.4rem 0.75rem;
-  font-size: 0.9rem;
+  border-radius: 50px;
+  padding: 0.36rem 0.88rem;
+  font-size: 0.86rem;
   font-weight: 700;
+  font-family: inherit;
   cursor: pointer;
   flex-shrink: 0;
+  transition: background 0.15s;
 }
-.pdf-page-btn:hover { background: rgba(255,255,255,0.25); }
-.pdf-page-btn:disabled { opacity: 0.35; cursor: default; }
+.pdf-page-btn:hover:not(:disabled) { background: rgba(255,255,255,0.22); }
+.pdf-page-btn:disabled { opacity: 0.32; cursor: default; }
+#pdfPageInfo { font-size: 0.83rem; color: rgba(255,255,255,0.68); white-space: nowrap; font-weight: 500; }
 
-#pdfPageInfo {
-  font-size: 0.88rem;
-  color: rgba(255,255,255,0.85);
-  white-space: nowrap;
-}
-
-/* Canvas scroll area */
 #pdfCanvasWrap {
   flex: 1;
   overflow-y: auto;
@@ -672,29 +615,29 @@ details.nested ul {
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 0.75rem 0.5rem;
-  gap: 0.75rem;
+  padding: 1rem 0.5rem;
+  gap: 1rem;
   -webkit-overflow-scrolling: touch;
+  background: #0F172A;
 }
-
 .pdf-page-canvas {
   display: block;
-  box-shadow: 0 2px 12px rgba(0,0,0,0.5);
+  box-shadow: 0 4px 24px rgba(0,0,0,0.6);
   max-width: 100%;
+  border-radius: 4px;
 }
-
 #pdfLoadingMsg {
-  color: rgba(255,255,255,0.7);
-  font-size: 1rem;
+  color: rgba(255,255,255,0.48);
+  font-size: 0.92rem;
   margin: auto;
   text-align: center;
   padding: 2rem;
 }
 
-/* ── REDUCED MOTION ── */
+/* ══ REDUCED MOTION ══ */
 @media (prefers-reduced-motion: reduce) {
-  .section, summary::before, .chevron { transition: none; }
-  details.search-highlight { animation: none; background: #fff9c4; }
+  .section, summary::before, .chevron, .nav-button, .logo-btn { transition: none; }
+  details.search-highlight { animation: none; background: #FFFBEB; }
 }
 </style>
 </head>
@@ -721,6 +664,12 @@ details.nested ul {
 <!-- ═══════════════ SEARCH ═══════════════ -->
 <div class="search-wrap" role="search">
   <div class="search-inner">
+    <span class="search-icon">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
+        <circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="2.2"/>
+        <path d="M16.5 16.5L21 21" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/>
+      </svg>
+    </span>
     <input
       type="search"
       id="searchInput"
@@ -759,7 +708,7 @@ details.nested ul {
       </svg>
     </span>
     <span class="nav-label">Anaesthesia for Caesarean delivery</span>
-    <span class="chevron"></span>
+    <span class="nav-chevron-wrap"><span class="chevron"></span></span>
   </button>
   <div id="lscs" class="section">
 
@@ -977,7 +926,7 @@ details.nested ul {
       </svg>
     </span>
     <span class="nav-label">Other Obstetric Procedures</span>
-    <span class="chevron"></span>
+    <span class="nav-chevron-wrap"><span class="chevron"></span></span>
   </button>
   <div id="procedures" class="section">
 
@@ -1055,7 +1004,7 @@ details.nested ul {
       </svg>
     </span>
     <span class="nav-label">Labour Analgesia</span>
-    <span class="chevron"></span>
+    <span class="nav-chevron-wrap"><span class="chevron"></span></span>
   </button>
   <div id="labour" class="section">
 
@@ -1235,7 +1184,7 @@ details.nested ul {
       </svg>
     </span>
     <span class="nav-label">Emergencies</span>
-    <span class="chevron"></span>
+    <span class="nav-chevron-wrap"><span class="chevron"></span></span>
   </button>
   <div id="emergencies" class="section">
 
@@ -1283,7 +1232,7 @@ details.nested ul {
       </svg>
     </span>
     <span class="nav-label">Key Contacts</span>
-    <span class="chevron"></span>
+    <span class="nav-chevron-wrap"><span class="chevron"></span></span>
   </button>
   <div id="contacts" class="section">
 
@@ -1310,7 +1259,7 @@ details.nested ul {
   </div><!-- /contacts -->
 
   <div class="footer">
-    Version 1.0 - 10.06.2026 · Based on LGT Obstetric Anaesthesia Guidelines 10th Ed.
+    Version 2026-02-07 · Based on LGT Obstetric Anaesthesia Guidelines 10th Ed.
   </div>
 </div><!-- /container -->
 
@@ -1352,16 +1301,15 @@ details.nested ul {
     <p>
       This application is a quick-reference summary based on the
       <strong>LGT Obstetric Anaesthesia Guidelines</strong>.
-      <p>
-      It is a decision-support tool, but ultimate responsibility for treatment decisions remain with the responsible anaesthetist. It is intended for use by those trained in Obstetric Anaesthesia (post-IAOC) and does not replace
-      clinical judgement or the full, formal guideline. This is not an MHRA determined medical device.
-      </p>
+      It is intended for use by trained clinicians and does not replace
+      clinical judgement or formal guidelines.
     </p>
     <p>
       <a href="#" id="pdfLink">View full LGT Obstetric Anaesthesia Guidelines (PDF)</a>
     </p>
     <p>
-      Version 1.0. 10.06.2026<br>
+      Version 2026-02-07<br>
+      For local guidance only.
     </p>
     <button class="modal-close" id="modalClose">Close</button>
   </div>
@@ -1601,7 +1549,7 @@ details.nested ul {
 
     /* Clear search */
     searchInput.value = '';
-    searchClear.style.display = 'none';
+    searchClear.classList.remove('visible-btn');
     closeResults();
 
     /* Open the parent nav section */
@@ -1638,13 +1586,13 @@ details.nested ul {
 
   searchInput.addEventListener('input', () => {
     const val = searchInput.value;
-    searchClear.style.display = val ? 'block' : 'none';
+    searchClear.classList.toggle('visible-btn', !!val);
     runSearch(val);
   });
 
   searchClear.addEventListener('click', () => {
     searchInput.value = '';
-    searchClear.style.display = 'none';
+    searchClear.classList.remove('visible-btn');
     closeResults();
     searchInput.focus();
   });
@@ -1915,7 +1863,7 @@ details.nested ul {
 
     /* Clear search */
     searchInput.value = '';
-    searchClear.style.display = 'none';
+    searchClear.classList.remove('visible-btn');
     closeResults();
 
     /* Scroll to top */
