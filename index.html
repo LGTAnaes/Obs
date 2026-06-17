@@ -664,13 +664,15 @@ li strong { color: #1E293B; }
 
 #imgWrap {
   flex: 1;
-  overflow: auto;
+  overflow: hidden;
   display: flex;
-  align-items: flex-start;
+  align-items: center;
   justify-content: center;
-  padding: 0.75rem 0.5rem;
-  -webkit-overflow-scrolling: touch;
+  position: relative;
+  touch-action: none; /* JS handles all touch */
+  cursor: grab;
 }
+#imgWrap:active { cursor: grabbing; }
 
 #imgEl {
   max-width: 100%;
@@ -678,8 +680,12 @@ li strong { color: #1E293B; }
   display: block;
   border-radius: 4px;
   box-shadow: 0 4px 24px rgba(0,0,0,0.6);
-  /* Allow pinch-zoom on mobile */
-  touch-action: pan-x pan-y;
+  transform-origin: center center;
+  transform: scale(1) translate(0px, 0px);
+  will-change: transform;
+  pointer-events: none;
+  user-select: none;
+  -webkit-user-select: none;
 }
 
 /* ══ REDUCED MOTION ══ */
@@ -767,23 +773,27 @@ li strong { color: #1E293B; }
         <details class="nested">
           <summary>Spinal</summary>
           <ul>
-            <li>14–16G IV access, warmed fluids running</li>
-            <li>2.0–2.5 ml 0.5% heavy bupivacaine + 300 mcg diamorphine
-              <ul><li>Alternative: 100 mcg PF morphine + 10–15 mcg fentanyl</li></ul>
+            <li><strong>Block height required:</strong> T4–S3 bilateral sensory block</li>
+            <li><strong>Preparation:</strong> 14–16G IV access, warmed Hartmann's solution running</li>
+            <li><strong>Drugs:</strong>
+              <ul>
+                <li>2.0–2.5 ml 0.5% hyperbaric bupivacaine + diamorphine 300–400 micrograms</li>
+                <li>If no diamorphine: preservative-free morphine 100 micrograms + fentanyl 10–15 micrograms</li>
+              </ul>
             </li>
-            <li>Phenylephrine infusion 50 mcg/ml started at 40 ml/hr</li>
-            <li>Aiming bilateral sensory block T4–S3</li>
+            <li><strong>Vasopressor:</strong> phenylephrine 50 micrograms/ml infusion at 40 ml/hr immediately after spinal</li>
           </ul>
         </details>
 
         <details class="nested">
-          <summary>CSE</summary>
+          <summary>Combined Spinal-Epidural (CSE)</summary>
           <ul>
-            <li>Consider for prolonged surgery or complex medical conditions</li>
-            <li>Reduce spinal dose in cardiac disease, short stature, obesity</li>
-            <li>Phenylephrine infusion 50 mcg/ml started at 40 ml/hr</li>
-            <li>Tegaderm dressing + Mefix strip</li>
-            <li>If initial spinal bolus does not achieve desired block height, use 5 ml bolus of epidural top-ups and re-assess</li>
+            <li><strong>Block height required:</strong> T4–S3 bilateral sensory block</li>
+            <li><strong>Indications:</strong> prolonged surgery, complex medical conditions</li>
+            <li><strong>Drugs:</strong> reduced spinal dose (cardiac disease, short stature, obesity); epidural catheter available for supplementation</li>
+            <li><strong>Vasopressor:</strong> phenylephrine 50 micrograms/ml infusion at 40 ml/hr</li>
+            <li>Secure catheter with Tegaderm + Mefix dressing</li>
+            <li>If spinal block height inadequate: 5 ml epidural bolus and reassess</li>
             <li>Consider 5–10 ml epidural top-up after 75–90 mins if surgery ongoing</li>
           </ul>
         </details>
@@ -791,33 +801,33 @@ li strong { color: #1E293B; }
         <details class="nested">
           <summary>Epidural Top-Up</summary>
           <ul>
-            <li>Only if functioning adequately. If not, remove and place spinal</li>
-            <li>Use 1 of the following:
+            <li><strong>Block height required:</strong> T4–S3 bilateral sensory block with dense motor block</li>
+            <li>Only if functioning adequately — if not, remove and site spinal</li>
+            <li><strong>Top-up solution</strong> (choose one, up to 20 ml):
               <ul>
-                <li>0.5% bupivacaine</li>
+                <li>0.5% levobupivacaine</li>
                 <li>0.75% ropivacaine</li>
-                <li>2% lidocaine + adrenaline 1:200,000 (0.1 ml 1:1000 adrenaline drawn up to 20 ml with 2% lidocaine)</li>
               </ul>
             </li>
-            <li>Test dose of 3 ml, followed by 5 ml increments up to a total of 20 ml</li>
-            <li>Add fentanyl 50–100 mcg to initial bolus</li>
-            <li>Diamorphine 3 mg (or PF morphine 3 mg) at end</li>
+            <li>Test dose 2–3 ml, then 5 ml increments over 5 minutes</li>
+            <li>Add fentanyl 50 micrograms if patient is in pain</li>
+            <li>At end of surgery: diamorphine 3 mg epidural (or preservative-free morphine 3 mg)</li>
           </ul>
         </details>
 
         <details class="nested">
           <summary>Intra-operative pain under regional anaesthesia</summary>
           <ul>
-            <li>If patient has epidural, a further top-up can be given</li>
-            <li>If no epidural, offer GA and convert if patient accepts</li>
-            <li>If GA declined, rescue analgesia includes:
+            <li>If patient has epidural: administer further top-up (up to 10 ml 0.5% levobupivacaine + fentanyl 50 micrograms)</li>
+            <li>If no epidural: offer general anaesthesia; convert if patient accepts</li>
+            <li>If general anaesthesia declined, rescue analgesia:
               <ul>
-                <li>Alfentanil 200 mcg increments, fentanyl 20 mcg increments</li>
+                <li>Alfentanil 200 microgram increments (up to 1 mg) or fentanyl 20 microgram increments</li>
                 <li>Ketamine 10–20 mg IV</li>
-                <li>Nitrous oxide in O₂ (50:50)</li>
+                <li>Nitrous oxide in oxygen (50:50)</li>
               </ul>
             </li>
-            <li>Clearly document the events and discussions with patient</li>
+            <li>Clearly document events, discussions, and any refusal of general anaesthesia</li>
           </ul>
         </details>
 
@@ -831,12 +841,12 @@ li strong { color: #1E293B; }
         <details class="nested">
           <summary>Indications</summary>
           <ul>
-            <li>Category 1 emergencies</li>
+            <li>Category 1 Caesarean section with acute severe fetal distress and no time for spinal (confirm with obstetrician)</li>
             <li>Neuraxial contraindicated:
               <ul>
                 <li>Maternal refusal</li>
                 <li>Maternal coagulopathy</li>
-                <li>CVS instability</li>
+                <li>Haemodynamic instability</li>
                 <li>Maternal sepsis / localised infection</li>
               </ul>
             </li>
@@ -847,27 +857,23 @@ li strong { color: #1E293B; }
         <details class="nested">
           <summary>Management</summary>
           <ul>
-            <li>30 ml PO sodium citrate</li>
-            <li>14–16G cannula with warm fluids running</li>
+            <li>Aim for a 2nd anaesthetist to be present for all emergency general anaesthetics</li>
+            <li>30 ml oral sodium citrate</li>
+            <li>14–16G cannula, warmed Hartmann's solution running</li>
             <li>Ramped position with Oxford HELP pillow</li>
             <li>Suction switched on and accessible</li>
-            <li>Pre-oxygenation:
-              <ul>
-                <li>Pre-oxygenate with 100% O₂ via facemask</li>
-                <li>Consider HFNO during apnoea</li>
-              </ul>
-            </li>
+            <li>Pre-oxygenation: 100% O₂ via close-fitting facemask; consider high-flow nasal oxygen (THRIVE) in high BMI</li>
             <li>When surgeon is scrubbed and ready, induce:
               <ul>
-                <li>Propofol or Thiopentone</li>
-                <li>Rocuronium or Suxamethonium</li>
-                <li>Alfentanil up to 1 mg for hypertensive mothers</li>
+                <li>Thiopentone 5–7 mg/kg or Propofol</li>
+                <li>Rocuronium 1 mg/kg or Suxamethonium 1–1.5 mg/kg</li>
+                <li>Short-acting opioid (fentanyl / alfentanil) for hypertensive or cardiac disease</li>
               </ul>
             </li>
-            <li>Videolaryngoscopy strongly recommended, size 7 COETT</li>
-            <li>Volatile agent immediately after intubation in 50% N₂O at high flows aiming MAC 1.0</li>
-            <li>Opioid analgesia following delivery (10–15 mg IV morphine) + PCA</li>
-            <li>Consider TAP blocks if patient consented (20 ml 0.25% bupivacaine each side)</li>
+            <li>Videolaryngoscopy is first-line for all intubations (DAS guidelines); size 7 COETT</li>
+            <li>Volatile agent immediately after intubation; 33–50% O₂ with N₂O aiming MAC &gt;1.0</li>
+            <li>Following delivery: morphine 10–15 mg IV + paracetamol 1 g IV; consider patient-controlled analgesia (PCA)</li>
+            <li>Consider TAP blocks if consented (20 ml 0.25% levobupivacaine each side)</li>
           </ul>
         </details>
 
@@ -883,67 +889,68 @@ li strong { color: #1E293B; }
           <ul>
             <li>Cefuroxime 1.5 g IV &amp; Metronidazole 500 mg IV</li>
             <li>Penicillin allergy: Clindamycin 600 mg IV &amp; Gentamicin 4 mg/kg IV (max 400 mg)</li>
+            <li>MRSA positive: add Vancomycin — contact Microbiology for advice</li>
           </ul>
         </details>
 
         <details class="nested">
           <summary>Post-op Analgesia</summary>
           <ul>
-            <li>Prescribe the 'C-section Medication Protocol' on iCare
+            <li>Prescribe 'C-Section Medication Inpatient Protocol' on iCare
               <ul>
-                <li><em>Regular:</em>
+                <li><em>Regular (Days 1–2):</em>
                   <ul>
-                    <li>Paracetamol 1 g PO QDS</li>
-                    <li>Ibuprofen 400 mg PO TDS</li>
-                    <li>Morphine MR 10 mg PO BD (2 doses only)</li>
+                    <li>Paracetamol 1 g orally every 6 hours</li>
+                    <li>Ibuprofen 400 mg orally every 8 hours (after food)</li>
+                    <li>Morphine sulphate oral solution 10 mg twice daily for first 24 hours only (2 doses, starting 6–10 hours post intrathecal diamorphine/morphine)</li>
+                  </ul>
+                </li>
+                <li><em>Regular (from Day 2):</em>
+                  <ul>
+                    <li>Dihydrocodeine 30 mg orally every 6 hours</li>
                   </ul>
                 </li>
                 <li><em>PRN:</em>
                   <ul>
-                    <li>Morphine IR 10–20 mg 4 hourly</li>
-                    <li>Ondansetron 4 mg IV 8 hourly</li>
-                    <li>Cyclizine 50 mg PO/IV TDS</li>
-                    <li>Naloxone 25 mcg SC hourly</li>
+                    <li>Morphine sulphate oral solution 10 mg up to every 4 hours</li>
+                    <li>Ondansetron 4 mg IV every 8 hours</li>
+                    <li>Cyclizine 50 mg PO/IV every 8 hours</li>
+                    <li>Naloxone 25 micrograms SC hourly (max 3 doses) for opioid-induced pruritus</li>
                   </ul>
                 </li>
               </ul>
             </li>
+            <li>For general anaesthesia without TAP blocks: consider patient-controlled analgesia (PCA) morphine</li>
           </ul>
         </details>
 
         <details class="nested">
           <summary>Uterotonics</summary>
           <ul>
-            <li><strong>Elective:</strong>
+            <li><strong>First-line — all Caesarean deliveries:</strong>
               <ul>
-                <li>Carbetocin 100 mcg IV
-                  <ul><li>Caution in: asthma, CVS disease, hyponatraemia, migraine, epilepsy</li></ul>
-                </li>
-                <li>If response inadequate, move to 2nd line agents</li>
-                <li>If carbetocin contraindicated: oxytocin 3–5 U bolus then 40-in-40 infusion @ 10 ml/hr</li>
-                <li>TXA 1 g IV for all patients</li>
+                <li>Carbetocin 100 micrograms IV slow injection over ≥30 seconds after delivery</li>
+                <li>Caution in: epilepsy, severe asthma, cardiovascular disease, hyponatraemia, migraine</li>
+                <li>If uterine tone inadequate, move to 2nd line agents</li>
               </ul>
             </li>
-            <li><strong>Emergency:</strong>
+            <li><strong>If carbetocin contraindicated (elective):</strong>
               <ul>
-                <li>As per Elective uterotonics</li>
-                <li>Early movement to 2nd line agents as required</li>
+                <li>Oxytocin 1 unit IV bolus over ≥30 seconds; infusion: 40 units in 40 ml sodium chloride 0.9% at 5 ml/hr</li>
+                <li>If tone still inadequate after 2 mins: further 2 unit bolus; consider 2nd line agents</li>
               </ul>
             </li>
+            <li><strong>If carbetocin contraindicated (emergency / intrapartum):</strong>
+              <ul>
+                <li>Oxytocin 3 units IV bolus over ≥30 seconds; infusion: 40 units in 40 ml sodium chloride 0.9% at 10 ml/hr</li>
+                <li>If tone still inadequate after 2 mins: further 2 unit bolus; consider 2nd line agents</li>
+              </ul>
+            </li>
+            <li>Consider tranexamic acid 1 g IV</li>
             <li><strong>2nd line agents:</strong>
               <ul>
-                <li>Ergometrine 500 mcg IM
-                  <ul>
-                    <li>Avoid in PET, hypertension</li>
-                    <li>Ensure antiemetics given</li>
-                  </ul>
-                </li>
-                <li>Carboprost 250 mcg IM
-                  <ul>
-                    <li>Avoid in asthma</li>
-                    <li>Can repeat every 15 mins, up to max 8 doses</li>
-                  </ul>
-                </li>
+                <li>Ergometrine 500 micrograms IM — avoid in pre-eclampsia/hypertension; give antiemetic</li>
+                <li>Carboprost 250 micrograms IM — avoid in asthma; repeat every 15 mins, max 8 doses</li>
               </ul>
             </li>
           </ul>
@@ -981,22 +988,28 @@ li strong { color: #1E293B; }
     <details>
       <summary>Trial of Instrumental Delivery</summary>
       <ul>
-        <li>Anaesthetic as for LSCS as potential for conversion to LSCS</li>
-        <li>Regional anaesthetic block to T4</li>
-        <li>No routine prophylactic antibiotics</li>
+        <li><strong>Block height required:</strong> T4 bilateral sensory block (anaesthetic as for Caesarean section — potential for conversion)</li>
+        <li><strong>Antibiotic prophylaxis</strong> (give as soon as possible, within 6 hours of delivery):
+          <ul>
+            <li>Cefuroxime 1.5 g IV &amp; Metronidazole 500 mg IV</li>
+            <li>Penicillin allergy: Clindamycin 600 mg IV &amp; Gentamicin 4 mg/kg IV (max 400 mg)</li>
+            <li>MRSA positive: add Vancomycin — contact Microbiology</li>
+          </ul>
+        </li>
       </ul>
     </details>
 
     <details>
       <summary>Manual Removal of Placenta</summary>
       <ul>
-        <li>Assess CVS stability:
+        <li>Assess CVS stability first:
           <ul>
-            <li>If unstable: general anaesthesia</li>
-            <li>If stable: neuraxial anaesthesia aiming for block to T6
+            <li>If <strong>unstable:</strong> general anaesthesia</li>
+            <li>If <strong>stable:</strong> neuraxial anaesthesia
               <ul>
-                <li>Spinal: 2 ml 0.5% heavy bupivacaine ± fentanyl 10–15 mcg</li>
-                <li>Epidural top-up: bupivacaine, ropivacaine or lidocaine as per LSCS top-up — 10–15 ml</li>
+                <li><strong>Block height required:</strong> T6 bilateral sensory block</li>
+                <li>Spinal: 2 ml 0.5% hyperbaric bupivacaine ± fentanyl 10–15 micrograms</li>
+                <li>Epidural top-up: 0.5% levobupivacaine or 0.75% ropivacaine — 10–15 ml</li>
               </ul>
             </li>
           </ul>
@@ -1007,25 +1020,22 @@ li strong { color: #1E293B; }
     <details>
       <summary>Perineal Tear Repair</summary>
       <ul>
-        <li>Sacral block required
-          <ul>
-            <li>Spinal: 1.5–2 ml heavy bupivacaine ± fentanyl 10–15 mcg</li>
-            <li>Epidural top-up 10–15 ml</li>
-          </ul>
-        </li>
-        <li>Remain sitting ~3 minutes to enhance sacral block</li>
+        <li><strong>Block height required:</strong> Sacral block (S1–S5)</li>
+        <li>Spinal: 1.5–2 ml 0.5% hyperbaric bupivacaine ± fentanyl 10–15 micrograms</li>
+        <li>Epidural top-up: 10–15 ml low-dose mix</li>
+        <li>Remain sitting ~3 minutes after spinal to enhance sacral block</li>
       </ul>
     </details>
 
     <details>
       <summary>Cervical Suture Insertion / Removal</summary>
       <ul>
-        <li>Block T10–S4 required</li>
+        <li><strong>Block height required:</strong> T10–S4 bilateral sensory block</li>
         <li>Spinal:
           <ul>
-            <li>2 ml heavy bupivacaine 0.5%</li>
+            <li>2 ml 0.5% hyperbaric bupivacaine</li>
             <li>OR 2 ml hyperbaric prilocaine 2%</li>
-            <li>± fentanyl 10–15 mcg</li>
+            <li>± fentanyl 10–15 micrograms</li>
           </ul>
         </li>
       </ul>
@@ -1085,11 +1095,11 @@ li strong { color: #1E293B; }
             <li>Leave 5 cm of catheter in the epidural space</li>
             <li>Routine post-insertion checks (meniscal drop, aspiration)</li>
             <li>Secure with Lockit, Tegaderm and Mefix dressing</li>
-            <li>Test dose 5 ml + 10 ml loading of low-dose bag mixture (0.1% L-bupivacaine + 2 mcg/ml fentanyl)</li>
-            <li>Maintenance infusion via Bodyguard pump
+            <li>Test dose 5 ml + 10 ml loading of low-dose bag mixture (0.1% levobupivacaine + 2 micrograms/ml fentanyl)</li>
+            <li>Maintenance infusion via CADD-Solis pump:
               <ul>
-                <li>Code 611</li>
-                <li>PCEA with 8 ml (UHL) or 10 ml (QEH) bolus, 20 min lockout (max 120 ml / 4 hours)</li>
+                <li><strong>Standard protocol (level 1 — code 611):</strong> PIEB 7 ml every 60 minutes; patient-controlled epidural analgesia (PCEA) 8 ml bolus, 20 minute lockout</li>
+                <li><strong>Enhanced protocol (level 2 — code 600):</strong> use if standard protocol provides inadequate analgesia despite well-functioning epidural; PIEB 9 ml every 45 minutes; PCEA 8 ml bolus, 20 minute lockout</li>
               </ul>
             </li>
           </ul>
@@ -1105,8 +1115,8 @@ li strong { color: #1E293B; }
         <details class="nested">
           <summary>No block or low block</summary>
           <ul>
-            <li>10–20 ml low-dose mix (bag solution) via epidural, re-check in 20 mins</li>
-            <li>If no improvement, resite</li>
+            <li>Give 10–20 ml low-dose mix manually via epidural; reassess after 20 minutes</li>
+            <li>If no improvement: resite</li>
           </ul>
         </details>
 
@@ -1114,9 +1124,9 @@ li strong { color: #1E293B; }
           <summary>Missed segment</summary>
           <ul>
             <li>Truly a segment? vs unilateral block?</li>
-            <li>If confirmed, give 7–10 ml 0.25% bupivacaine + fentanyl 50 mcg</li>
             <li>Position mother sore side down</li>
-            <li>If no improvement after 20 mins, resite</li>
+            <li>Give 10 ml low-dose mix manually via epidural</li>
+            <li>If no improvement after 20 minutes: resite</li>
           </ul>
         </details>
 
@@ -1125,7 +1135,7 @@ li strong { color: #1E293B; }
           <ul>
             <li>Suspect if describing groin, vaginal, rectal or perineal pain</li>
             <li>Check S1/2 coverage with spray on lateral aspect of feet</li>
-            <li>Give 10–20 ml bag solution with mother sitting upright</li>
+            <li>Give 10–20 ml low-dose mix manually via epidural with mother sitting upright</li>
             <li>Recheck after 20 mins; if not improved consider resite (ideally at lower interspace)</li>
           </ul>
         </details>
@@ -1133,11 +1143,10 @@ li strong { color: #1E293B; }
         <details class="nested">
           <summary>Unilateral block</summary>
           <ul>
-            <li>Check if feet are warm and dry bilaterally</li>
-            <li>Lateral position sore side down, administer bolus from pump</li>
-            <li>If no improvement, pull catheter back by 1–2 cm and give another bolus</li>
-            <li>If still no improvement, give 7–10 ml 0.25% bupivacaine + 50 mcg fentanyl sore side down</li>
-            <li>Recheck block after 20 mins; if not improved consider resite</li>
+            <li>Check bilateral foot temperature/dryness (sympathetic block indicator)</li>
+            <li>Position mother sore side down; give 10 ml low-dose mix manually via epidural</li>
+            <li>If no improvement: pull catheter back 1–2 cm, resecure, give another 10 ml manual bolus; switch to enhanced protocol</li>
+            <li>If still no improvement: resite</li>
           </ul>
         </details>
 
@@ -1148,7 +1157,7 @@ li strong { color: #1E293B; }
             <li>Particularly common with OP head position</li>
             <li>Ensure block is working correctly (cold above T10, good sacral coverage)</li>
             <li>Warn mother that complete relief may not be achievable</li>
-            <li>Give 7–10 ml 0.25% bupivacaine + 50 mcg fentanyl; sit mother upright and assess after 20 mins</li>
+            <li>Give 7–10 ml 0.25% levobupivacaine + fentanyl 50 micrograms manually via epidural; sit mother upright and assess after 20 minutes</li>
           </ul>
         </details>
 
@@ -1174,15 +1183,15 @@ li strong { color: #1E293B; }
           <ul>
             <li>Dedicated 20G IV cannula, as proximal as possible</li>
             <li>Continuous SpO₂ monitoring before starting and throughout</li>
-            <li>Remifentanil 2 mg in 40 ml 0.9% NaCl (50 mcg/ml)
+            <li>Remifentanil 2 mg in 40 ml sodium chloride 0.9% (50 micrograms/ml)
               <ul>
-                <li>Initial bolus 0.4 ml (20 mcg) over 15 sec, 3 min lockout</li>
-                <li>Increase to max 0.8 ml (40 mcg) if inadequate</li>
+                <li>Initial bolus 0.4 ml (20 micrograms) over 15 seconds, 3 minute lockout</li>
+                <li>Increase to max 0.8 ml (40 micrograms) if inadequate</li>
               </ul>
             </li>
-            <li>Prescribe on iCare: ondansetron 4 mg IV 8 hourly PRN, naloxone 100–400 mcg IV PRN</li>
+            <li>Prescribe on iCare: ondansetron 4 mg IV 8 hourly as needed, naloxone 100–400 micrograms IV as needed</li>
             <li>Anaesthetist to assess for first 20 mins / 5 contractions</li>
-            <li><strong>Stop and call anaesthetist:</strong> sedation score 3, RR &lt;8, SpO₂ &lt;94% on O₂, pump alarming — never flush line</li>
+            <li><strong>Stop and call anaesthetist if:</strong> sedation score 3, respiratory rate &lt;8, SpO₂ &lt;94% on oxygen, pump alarming — never flush line</li>
           </ul>
         </details>
 
@@ -1315,6 +1324,7 @@ li strong { color: #1E293B; }
         <li>Obstetric Anaesthesia Consultant — #5119 (8–5 Mon–Fri)</li>
         <li>Obstetric Anaesthesia ODP — #5616</li>
         <li>General Anaesthesia SpR — #5000</li>
+        <li>Obstetric SpR — #4200</li>
       </ul>
     </details>
 
@@ -1325,13 +1335,14 @@ li strong { color: #1E293B; }
         <li>Obstetric Anaesthesia Consultant — #6612 (8–5 Mon–Fri)</li>
         <li>Obstetric Anaesthesia ODP — #6155</li>
         <li>General Anaesthesia SpR — #6316</li>
+        <li>Obstetric SpR — #6419</li>
       </ul>
     </details>
 
   </div><!-- /contacts -->
 
   <div class="footer">
-    Version 2026-02-07 · Based on LGT Obstetric Anaesthesia Guidelines 10th Ed.
+    Version 17 June 2026 · Based on LGT Obstetric Anaesthesia Guidelines 11th Edition (2026)
   </div>
 </div><!-- /container -->
 
@@ -1923,17 +1934,123 @@ li strong { color: #1E293B; }
   });
 
   /* ════════════════════════════════════════
-     IMAGE VIEWER (JPEG etc.)
+     IMAGE VIEWER — pinch-zoom + pan (iOS safe)
   ════════════════════════════════════════ */
   const imgOverlay = document.getElementById('imgOverlay');
   const imgEl      = document.getElementById('imgEl');
   const imgTitle   = document.getElementById('imgTitle');
   const imgBackBtn = document.getElementById('imgBackBtn');
+  const imgWrap    = document.getElementById('imgWrap');
+
+  /* Transform state */
+  let iz = 1;       /* current scale */
+  let ix = 0;       /* translate X */
+  let iy = 0;       /* translate Y */
+  /* Gesture start state */
+  let iz0 = 1, ix0 = 0, iy0 = 0;
+  let pinchDist0 = 0;
+  let pinchMidX  = 0, pinchMidY = 0;
+  let panStartX  = 0, panStartY = 0;
+  let isPinching = false;
+
+  function dist2(t) {
+    const dx = t[0].clientX - t[1].clientX;
+    const dy = t[0].clientY - t[1].clientY;
+    return Math.sqrt(dx * dx + dy * dy);
+  }
+
+  function clampTranslate(scale, tx, ty) {
+    /* Prevent panning beyond image bounds */
+    const wrap   = imgWrap.getBoundingClientRect();
+    const maxX   = Math.max(0, (imgEl.naturalWidth  * scale - wrap.width)  / 2);
+    const maxY   = Math.max(0, (imgEl.naturalHeight * scale - wrap.height) / 2);
+    return [
+      Math.min(maxX, Math.max(-maxX, tx)),
+      Math.min(maxY, Math.max(-maxY, ty))
+    ];
+  }
+
+  function applyImgTransform() {
+    imgEl.style.transform = `translate(${ix}px, ${iy}px) scale(${iz})`;
+  }
+
+  function resetImgTransform() {
+    iz = 1; ix = 0; iy = 0;
+    applyImgTransform();
+  }
+
+  /* Double-tap to zoom */
+  let lastTap = 0;
+  imgWrap.addEventListener('touchend', e => {
+    if (e.touches.length !== 0) return;
+    const now = Date.now();
+    if (now - lastTap < 300 && !isPinching) {
+      if (iz > 1.5) {
+        resetImgTransform();
+      } else {
+        iz = 2.5;
+        [ix, iy] = clampTranslate(iz, 0, 0);
+        applyImgTransform();
+      }
+    }
+    lastTap = now;
+    isPinching = false;
+  });
+
+  imgWrap.addEventListener('touchstart', e => {
+    e.preventDefault();
+    if (e.touches.length === 2) {
+      isPinching  = true;
+      pinchDist0  = dist2(e.touches);
+      pinchMidX   = (e.touches[0].clientX + e.touches[1].clientX) / 2;
+      pinchMidY   = (e.touches[0].clientY + e.touches[1].clientY) / 2;
+      iz0 = iz; ix0 = ix; iy0 = iy;
+    } else if (e.touches.length === 1) {
+      panStartX = e.touches[0].clientX - ix;
+      panStartY = e.touches[0].clientY - iy;
+    }
+  }, { passive: false });
+
+  imgWrap.addEventListener('touchmove', e => {
+    e.preventDefault();
+    if (e.touches.length === 2) {
+      isPinching = true;
+      const d     = dist2(e.touches);
+      const ratio = d / pinchDist0;
+      iz = Math.min(Math.max(iz0 * ratio, 1), 6);
+
+      /* Zoom toward pinch midpoint */
+      const midX = (e.touches[0].clientX + e.touches[1].clientX) / 2;
+      const midY = (e.touches[0].clientY + e.touches[1].clientY) / 2;
+      const dMidX = midX - pinchMidX;
+      const dMidY = midY - pinchMidY;
+      let tx = ix0 * (iz / iz0) + dMidX;
+      let ty = iy0 * (iz / iz0) + dMidY;
+      [ix, iy] = clampTranslate(iz, tx, ty);
+      applyImgTransform();
+    } else if (e.touches.length === 1 && !isPinching) {
+      let tx = e.touches[0].clientX - panStartX;
+      let ty = e.touches[0].clientY - panStartY;
+      [ix, iy] = iz > 1 ? clampTranslate(iz, tx, ty) : [0, 0];
+      applyImgTransform();
+    }
+  }, { passive: false });
+
+  /* Mouse wheel zoom for desktop */
+  imgWrap.addEventListener('wheel', e => {
+    e.preventDefault();
+    const factor = e.deltaY < 0 ? 1.12 : 0.89;
+    iz = Math.min(Math.max(iz * factor, 1), 6);
+    if (iz === 1) { ix = 0; iy = 0; }
+    else [ix, iy] = clampTranslate(iz, ix, iy);
+    applyImgTransform();
+  }, { passive: false });
 
   function openImage(url, title) {
     imgTitle.textContent = title || 'Image';
     imgEl.src = url;
-    imgEl.alt = title || 'Image';
+    imgEl.alt = title || '';
+    resetImgTransform();
     imgOverlay.classList.add('open');
     imgOverlay.style.display = 'flex';
     history.pushState({ imgOpen: true }, '', '');
@@ -1943,6 +2060,7 @@ li strong { color: #1E293B; }
     imgOverlay.classList.remove('open');
     imgOverlay.style.display = 'none';
     imgEl.src = '';
+    resetImgTransform();
   }
 
   imgBackBtn.addEventListener('click', closeImage);
